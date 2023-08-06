@@ -3,41 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BaseCharacterController
 {
-    [Header("Player Parameters")]
+    [Header("Player References")]
     [Space(4)]
-    public Rigidbody2D rb;
     public Collider2D punchHitbox;
-    public float moveSpeed;
 
-    [Header("Run-time variables")]
-    [Space(4)]
-    public Vector2 moveDirection;
-
-    void Awake() {
-        rb = rb != null ? rb : Global.FindComponent<Rigidbody2D>(gameObject);
+    protected override void Awake() {
+        base.Awake();
         if (punchHitbox) punchHitbox.enabled = false;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void FixedUpdate() {
-        rb.AddForce(moveDirection * moveSpeed);
-    }
-
     void OnMove(InputValue value) {
+        Vector2 prevMove = moveDirection;
         moveDirection = value.Get<Vector2>();
+        if (moveDirection.magnitude != 0f) {
+            moveAnim.Move();
+            sprite.flipX = moveDirection.x > 0f;
+            accessory.flipX = sprite.flipX;
+        }
+        else {
+            moveAnim.Stop();
+        }
+        
     }
 
     void OnFire(InputValue value){
