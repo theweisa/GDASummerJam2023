@@ -20,7 +20,7 @@ public class TextBoxHandler : MonoBehaviour
 
     public void Activate()
     {
-        PlayerController.Instance.canMove = false;
+        PlayerManager.Instance.controller.canMove = false;
         canContinue = false;
         textBox.SetActive(true);
         StartCoroutine(DisplayLine(NPC.script[0]));
@@ -28,7 +28,7 @@ public class TextBoxHandler : MonoBehaviour
 
     public void Deactivate()
     {
-        PlayerController.Instance.canMove = true;
+        PlayerManager.Instance.controller.canMove = true;
         textBox.SetActive(false);
     }
 

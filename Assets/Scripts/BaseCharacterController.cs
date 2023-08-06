@@ -18,6 +18,7 @@ public class BaseCharacterController : MonoBehaviour
     [Header("Run-time variables")]
     [Space(4)]
     public Vector2 moveDirection;
+    public bool canMove=true;
     protected virtual void Awake() {
         rb = rb != null ? rb : Global.FindComponent<Rigidbody2D>(gameObject);
         sprite = sprite != null ? sprite : Global.FindComponent<SpriteRenderer>(gameObject);
@@ -25,6 +26,7 @@ public class BaseCharacterController : MonoBehaviour
         accessory = accessory != null ? accessory : Global.FindComponent<SpriteRenderer>(transform.Find("Accessory").gameObject);
     }
     protected virtual void FixedUpdate() {
+        if (!canMove) return;
         rb.AddForce(moveDirection * moveSpeed);
     }
 }
