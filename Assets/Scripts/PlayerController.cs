@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : UnitySingleton<PlayerController>
 {
     [Header("Player Parameters")]
     [Space(4)]
     public Rigidbody2D rb;
     public float moveSpeed;
+    public bool canMove = true;
 
     [Header("Run-time variables")]
     [Space(4)]
     public Vector2 moveDirection;
 
-    void Awake() {
+    public override void Awake() {
+        base.Awake();
         rb = rb != null ? rb : Global.FindComponent<Rigidbody2D>(gameObject);
     }
 
@@ -35,6 +37,10 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnMove(InputValue value) {
+        if(canMove == false)
+        {
+            return;
+        }
         moveDirection = value.Get<Vector2>();
     }
 }
