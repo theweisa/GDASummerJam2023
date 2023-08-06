@@ -7,6 +7,7 @@ public class NPC : MonoBehaviour
     public GameObject textBoxObject;
     public TextBoxHandler textBox;
     public List<string> script = new List<string>();
+    public float textSpeed;
     void Start()
     {
         
@@ -28,10 +29,6 @@ public class NPC : MonoBehaviour
             else if(textBox.isActiveAndEnabled == false)
             {
                 textBox.Activate();
-            }
-            else if(textBox.canContinue == true)
-            {
-                textBox.Deactivate();
             }
         }
     }
