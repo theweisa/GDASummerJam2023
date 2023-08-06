@@ -526,11 +526,11 @@ MonoBehaviour:
     Path: event:/World_TensionRiser
   <DialogueBlip>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1753522702
+      Data2: 1171669520
+      Data3: -144962904
+      Data4: -2135214463
+    Path: event:/NPC_Dialogue
   <QueueNumber>k__BackingField:
     Guid:
       Data1: 2077224035

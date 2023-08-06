@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using FMOD.Studio;
+using FMODUnity;
 
 public class RageLogic : UnitySingleton<RageLogic>
 {
@@ -13,7 +15,14 @@ public class RageLogic : UnitySingleton<RageLogic>
     private UnityEvent OnCompleted;
     [SerializeField]
     private UnityEvent<float> OnProgress;
+    private EventInstance rageSound;
     
+    private void Start()
+    {
+        rageSound = AudioManager.instance.CreateEventInstance(FMODEventReferences.instance.TensionRiser);
+        rageSound.start();
+    }
+
     public void AddRage(float progress)
     {
         AddRage(progress, rageSpeed);
@@ -31,6 +40,7 @@ public class RageLogic : UnitySingleton<RageLogic>
         float newProgress = initialProgress + progress;
         Debug.Log($"add {progress} rage");
         LeanTween.value(rageMeter.gameObject, (float val)=>{ rageMeter.value = val; }, initialProgress, newProgress, speed).setEaseOutExpo();
+
         yield return null;
         /*while (time < 1){
             rageMeter.value = Mathf.Lerp(initialProgress, progress, time);
@@ -39,5 +49,10 @@ public class RageLogic : UnitySingleton<RageLogic>
             OnProgress?.Invoke(rageMeter.value);
             yield return null;
         }*/
+    }
+
+    private void Update()
+    {
+        rageSound.setParameterByName("Rage", rageMeter.value/100);
     }
 }
