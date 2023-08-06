@@ -27,8 +27,7 @@ public class ObjectiveText : MonoBehaviour
     private IEnumerator AnimatePopIn(){
         var targetScale = gameObject.transform.localScale;
         gameObject.transform.localScale = new Vector3(0f, 0f, 0f);
-        Debug.Log(targetScale);
-        LeanTween.scale(gameObject, targetScale, 0.75f);
+        LeanTween.scale(gameObject, targetScale, 0.4f);
         yield return null;
     }
 }
