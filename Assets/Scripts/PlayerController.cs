@@ -17,15 +17,16 @@ public class PlayerController : BaseCharacterController
     void OnMove(InputValue value) {
         Vector2 prevMove = moveDirection;
         moveDirection = value.Get<Vector2>();
-        if (moveDirection.magnitude != 0f) {
-            moveAnim.Move();
-            sprite.flipX = moveDirection.x > 0f;
+    }
+
+    protected override void CheckFlip()
+    {
+        if (sprite.flipX != (Global.GetMouseWorldPosition()-transform.position).x > 0f) {
+            sprite.flipX = !sprite.flipX;
             accessory.flipX = sprite.flipX;
+            moveAnim.Flip();
         }
-        else {
-            moveAnim.Stop();
-        }
-        
+        accessory.flipX = sprite.flipX;
     }
 
     void OnFire(InputValue value){
@@ -38,7 +39,8 @@ public class PlayerController : BaseCharacterController
         towardsMouseFromPlayer = towardsMouseFromPlayer.normalized;
         punchHitbox.transform.position = transform.position;
         punchHitbox.transform.position = Vector3.MoveTowards(punchHitbox.transform.position, punchHitbox.transform.position + towardsMouseFromPlayer * 6, 16);
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + towardsMouseFromPlayer * 2, 16);
+        rb.AddForce(50f*towardsMouseFromPlayer, ForceMode2D.Impulse);
+        //transform.position = Vector3.MoveTowards(transform.position, transform.position + towardsMouseFromPlayer * 2, 16);
         punchHitbox.enabled = true;
         Debug.Log("Punching");
         yield return new WaitForSeconds(.5f);

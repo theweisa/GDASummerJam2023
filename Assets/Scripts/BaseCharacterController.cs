@@ -27,6 +27,23 @@ public class BaseCharacterController : MonoBehaviour
     }
     protected virtual void FixedUpdate() {
         if (!canMove) return;
+        CheckFlip();
         rb.AddForce(moveDirection * moveSpeed);
+        if (moveDirection.magnitude != 0f) {
+            moveAnim.Move();
+        }
+        else {
+            moveAnim.Stop();
+        }
+    }
+    protected virtual void CheckFlip() {
+        if (moveDirection.x != 0f) {
+            if (sprite.flipX != moveDirection.x > 0f) {
+                sprite.flipX = !sprite.flipX;
+                accessory.flipX = sprite.flipX;
+                moveAnim.Flip();
+            }
+            accessory.flipX = sprite.flipX;
+        }
     }
 }

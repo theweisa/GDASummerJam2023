@@ -21,6 +21,7 @@ public class TextBoxHandler : MonoBehaviour
     public void Activate()
     {
         PlayerManager.Instance.controller.canMove = false;
+        PlayerManager.Instance.controller.moveAnim.Stop();
         canContinue = false;
         textBox.SetActive(true);
         StartCoroutine(DisplayLine(NPC.script[0]));

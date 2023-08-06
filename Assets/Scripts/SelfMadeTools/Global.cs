@@ -23,4 +23,7 @@ public static class Global {
         return returnVal;
         
     }
+    public static Vector3 GetMouseWorldPosition() {
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
 }
