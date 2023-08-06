@@ -28,7 +28,7 @@ public class RageLogic : UnitySingleton<RageLogic>
     {
         float initialProgress = rageMeter.value;
         float newProgress = initialProgress + progress;
-        Debug.Log($"add {progress} rage");
+        // Debug.Log($"add {progress} rage");
         LeanTween.value(rageMeter.gameObject, (float val)=>{ rageMeter.value = val; }, initialProgress, newProgress, speed).setEaseOutExpo();
         yield return null;
     }

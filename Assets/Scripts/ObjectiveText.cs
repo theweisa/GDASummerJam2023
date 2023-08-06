@@ -5,7 +5,7 @@ using TMPro;
 
 public class ObjectiveText : MonoBehaviour
 {
-    private TMP_Text text;
+    public TMP_Text text;
     void Start()
     {
         gameObject.SetActive(false);
@@ -15,11 +15,20 @@ public class ObjectiveText : MonoBehaviour
     {
         text.text = objectiveText;
         gameObject.SetActive(true);
+        StartCoroutine(AnimatePopIn());
     }
 
     public void DeactivateObjective()
     {
         text.text = "";
         gameObject.SetActive(false);
+    }
+
+    private IEnumerator AnimatePopIn(){
+        var targetScale = gameObject.transform.localScale;
+        gameObject.transform.localScale = new Vector3(0f, 0f, 0f);
+        Debug.Log(targetScale);
+        LeanTween.scale(gameObject, targetScale, 0.75f);
+        yield return null;
     }
 }
