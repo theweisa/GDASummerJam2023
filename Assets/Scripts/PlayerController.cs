@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake() {
         rb = rb != null ? rb : Global.FindComponent<Rigidbody2D>(gameObject);
-        punchHitbox.enabled = false;
+        if (punchHitbox) punchHitbox.enabled = false;
     }
 
     // Start is called before the first frame update
