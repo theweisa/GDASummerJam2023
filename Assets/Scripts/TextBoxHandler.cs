@@ -9,8 +9,7 @@ public class TextBoxHandler : MonoBehaviour
     public GameObject textBox;
     public TMP_Text text;
     public NPC NPC;
-
-    private float typingSpeed = 0.1f;
+    public int currentLine = 0;
 
     public bool canContinue = true;
     void Start()
@@ -24,13 +23,20 @@ public class TextBoxHandler : MonoBehaviour
         PlayerManager.Instance.controller.moveAnim.Stop();
         canContinue = false;
         textBox.SetActive(true);
-        StartCoroutine(DisplayLine(NPC.script[0]));
+        StartCoroutine(DisplayLine(NPC.script[currentLine]));
+    }
+
+    public void Continue()
+    {
+        canContinue = false;
+        StartCoroutine(DisplayLine(NPC.script[currentLine]));
     }
 
     public void Deactivate()
     {
         PlayerManager.Instance.controller.canMove = true;
         textBox.SetActive(false);
+        currentLine = 0;
     }
 
     private IEnumerator DisplayLine(string line)
@@ -39,16 +45,23 @@ public class TextBoxHandler : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             text.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            yield return new WaitForSeconds(NPC.textSpeed);
         }
         canContinue = true;
+        currentLine += 1;
     }
 
     void Update()
     {
         if(Input.GetMouseButtonDown(0) && canContinue && gameObject.activeSelf)
         {
-            Deactivate();
+            if(currentLine >= NPC.script.Count){
+                Deactivate();
+            }
+            else
+            {
+                Continue();
+            }
         }
     }
 }
