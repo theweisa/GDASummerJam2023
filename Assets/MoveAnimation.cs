@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FMOD.Studio;
 public class MoveAnimation : MonoBehaviour
 {
     public float rotationDegree = 13f;
@@ -10,17 +10,22 @@ public class MoveAnimation : MonoBehaviour
     private bool left=false;
     public bool moving = false;
     private Vector3 initScale;
+    private EventInstance walkingSFX;
     
     public void Awake() {
         initScale = transform.localScale;
     }
     public void Move() {
         if (moving) return;
+        walkingSFX = AudioManager.instance.CreateEventInstance(FMODEventReferences.instance.Walking);
+        walkingSFX.start();
         moving = true;
         Turn();
     }
     public void Stop() {
         if (!moving) return;
+        walkingSFX.stop(STOP_MODE.ALLOWFADEOUT);
+        walkingSFX.release();
         moving = false;
         LeanTween.cancel(gameObject);
         LeanTween.scale(gameObject, initScale, rotateTimer*0.3f).setEaseOutQuad();
