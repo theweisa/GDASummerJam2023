@@ -26,18 +26,10 @@ public class RageLogic : UnitySingleton<RageLogic>
 
     private IEnumerator AnimateProgress(float progress, float speed)
     {
-        float time = 0;
         float initialProgress = rageMeter.value;
         float newProgress = initialProgress + progress;
         Debug.Log($"add {progress} rage");
         LeanTween.value(rageMeter.gameObject, (float val)=>{ rageMeter.value = val; }, initialProgress, newProgress, speed).setEaseOutExpo();
         yield return null;
-        /*while (time < 1){
-            rageMeter.value = Mathf.Lerp(initialProgress, progress, time);
-            time += Time.deltaTime * speed;
-            
-            OnProgress?.Invoke(rageMeter.value);
-            yield return null;
-        }*/
     }
 }
