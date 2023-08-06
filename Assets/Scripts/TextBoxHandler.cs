@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using FMOD.Studio;
+using FMODUnity;
 
 public class TextBoxHandler : MonoBehaviour
 {
@@ -35,10 +37,12 @@ public class TextBoxHandler : MonoBehaviour
 
     private IEnumerator DisplayLine(string line)
     {
+        RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", Random.Range(0, 25));
         text.text = "";
         foreach (char letter in line.ToCharArray())
         {
             text.text += letter;
+            RuntimeManager.PlayOneShot(FMODEventReferences.instance.DialogueBlip);
             yield return new WaitForSeconds(typingSpeed);
         }
         canContinue = true;
