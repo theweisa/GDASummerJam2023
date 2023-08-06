@@ -34,6 +34,7 @@ public class PlayerController : BaseCharacterController
     }
 
     IEnumerator punch(){
+        FMODUnity.RuntimeManager.PlayOneShot(FMODEventReferences.instance.PunchWhiff);
         Vector3 positionMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 towardsMouseFromPlayer = positionMouse - transform.position;
         towardsMouseFromPlayer = towardsMouseFromPlayer.normalized;

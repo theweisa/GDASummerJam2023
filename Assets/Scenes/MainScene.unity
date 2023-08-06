@@ -510,6 +510,13 @@ MonoBehaviour:
       Data3: 135851408
       Data4: 464042926
     Path: event:/Player_Walk
+  <PunchWhiff>k__BackingField:
+    Guid:
+      Data1: 313927413
+      Data2: 1279981447
+      Data3: 2146796686
+      Data4: -430048931
+    Path: event:/Player_PunchWhiff
   <Ambience>k__BackingField:
     Guid:
       Data1: -910595068
