@@ -9,9 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7943643904511288809}
-  - component: {fileID: 8388892426181633453}
-  - component: {fileID: 2651928244780452653}
-  - component: {fileID: 5026439713761388112}
   m_Layer: 0
   m_Name: NPCs
   m_TagString: Untagged
@@ -44,78 +41,6 @@ Transform:
   - {fileID: 8557990269989175834}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8388892426181633453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3169453652428920210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeb77ffcd8e19344695fd4c4bec13340, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textBoxObject: {fileID: 0}
-  textBox: {fileID: 0}
-  script: []
-  textSpeed: 0
-  rb: {fileID: 0}
-  talkedTo: 0
-  Alive: 0
-  Panic: 0
-  moveSpeed: 0
-  moveDirection: {x: 0, y: 0}
-  rageValue: 10
-  pitch: 10
---- !u!114 &2651928244780452653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3169453652428920210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeb77ffcd8e19344695fd4c4bec13340, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textBoxObject: {fileID: 0}
-  textBox: {fileID: 0}
-  script: []
-  textSpeed: 0
-  rb: {fileID: 0}
-  talkedTo: 0
-  Alive: 0
-  Panic: 0
-  moveSpeed: 0
-  moveDirection: {x: 0, y: 0}
-  rageValue: 10
-  pitch: 10
---- !u!114 &5026439713761388112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3169453652428920210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeb77ffcd8e19344695fd4c4bec13340, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textBoxObject: {fileID: 0}
-  textBox: {fileID: 0}
-  script: []
-  textSpeed: 0.1
-  rb: {fileID: 0}
-  talkedTo: 0
-  Alive: 0
-  Panic: 0
-  moveSpeed: 0
-  moveDirection: {x: 0, y: 0}
-  rageValue: 10
-  pitch: 10
 --- !u!1001 &210113550755876707
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -548,6 +473,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6688276809589935201, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: npc
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7486172139670091459, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -584,6 +513,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textBoxObject: {fileID: 7046161597819874741, guid: f6c4ddfab1e66064abbc51ba7c92ffa7, type: 3}
+  interactPrompt: {fileID: 0}
+  controller: {fileID: 0}
   textBox: {fileID: 0}
   script:
   - Please sit down and wait for your number to be called.
@@ -595,6 +526,7 @@ MonoBehaviour:
   moveSpeed: 0
   moveDirection: {x: 0, y: 0}
   rageValue: 0
+  anim: {fileID: 0}
   pitch: 10
   initialScript:
   - Hello! Welcome to the DMC!
@@ -606,7 +538,6 @@ MonoBehaviour:
   - Please sit down and wait for your number to be called.
   rageScript:
   - Hi! Fuck you ass hole.
-  mode: 0
 --- !u!4 &8557990269989175834 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4900881734889096757, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}

@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 public class NPC : MonoBehaviour
 {
     public GameObject textBoxObject;
+    public GameObject interactPrompt;
     public BaseCharacterController controller;
     public TextBoxHandler textBox;
     public List<string> script = new List<string>();
@@ -37,6 +38,12 @@ public class NPC : MonoBehaviour
         Vector3 dir = rb.velocity.normalized;
         dir.z = 0f;
         controller.moveDirection = dir;
+        if (script.Count == 0) {
+            interactPrompt.SetActive(false);
+        }
+        else {
+            interactPrompt.SetActive(true);
+        }
     }
 
     public virtual IEnumerator OnHit() {

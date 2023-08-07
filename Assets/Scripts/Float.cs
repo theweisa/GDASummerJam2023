@@ -8,7 +8,8 @@ public class Float : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LeanTween.moveLocalY(gameObject, transform.localPosition.y+floatFactor, 0.65f).setEaseOutQuart().setLoopPingPong();
+        float time = 0.65f + Random.Range(-0.15f, 0.15f);
+        LeanTween.moveLocalY(gameObject, transform.localPosition.y+floatFactor, time).setEaseOutQuart().setLoopPingPong();
     }
 
     // Update is called once per frame
