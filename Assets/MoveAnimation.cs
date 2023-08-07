@@ -7,7 +7,6 @@ public class MoveAnimation : MonoBehaviour
     public float rotationDegree = 13f;
     public float rotationOffset = 3f;
     public float rotateTimer;
-    private bool left=false;
     public bool moving = false;
     private Vector3 initScale;
     private EventInstance walkingSFX;
