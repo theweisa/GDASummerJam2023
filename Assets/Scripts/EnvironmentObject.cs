@@ -28,7 +28,7 @@ public class EnvironmentObject : MonoBehaviour
         if (coll.gameObject.tag != "Punch") return;
         if (rb == null) return;
         RuntimeManager.PlayOneShot(FMODEventReferences.instance.ChairHit);
-        CameraManager.Instance.StartShake(20f, 0.4f, 800f);
+        CameraManager.Instance.StartShake(10f, 0.2f, 400f);
         Vector2 dir = ((Vector2)Global.GetMouseWorldPosition() - (Vector2)PlayerManager.Instance.transform.position).normalized;
         rb.AddForce(dir * 40, ForceMode2D.Impulse);
     }
@@ -36,7 +36,7 @@ public class EnvironmentObject : MonoBehaviour
         if (coll.gameObject.tag != "Punch") return;
         if (rb == null) return;
         RuntimeManager.PlayOneShot(FMODEventReferences.instance.ChairHit);
-        CameraManager.Instance.StartShake(20f, 0.4f, 800f);
+        CameraManager.Instance.StartShake(10f, 0.2f, 400f);
         Vector2 dir = ((Vector2)Global.GetMouseWorldPosition() - (Vector2)PlayerManager.Instance.transform.position).normalized;
         rb.AddForce(dir * 10f, ForceMode2D.Impulse);
     }

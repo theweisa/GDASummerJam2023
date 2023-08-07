@@ -152,26 +152,36 @@ public class GameManager : UnitySingleton<GameManager>
 
         yield return QueueNumber.Instance.AnimatePopIn();
         QueueNumber.Instance.SetRectPos(new Vector2(0.5f, 1f));
-        QueueNumber.Instance.text.text = "fucking dumbass1";
+        QueueNumber.Instance.text.text = "Attention: due to a systems failure we are no longer able to process forms.";
         yield return new WaitForSeconds(3f);
         yield return QueueNumber.Instance.AnimateFadeOut();
-        yield return new WaitForSeconds(1f);    
+        yield return new WaitForSeconds(0.3f);    
 
         yield return QueueNumber.Instance.AnimatePopIn();
         QueueNumber.Instance.SetRectPos(new Vector2(0.5f, 0f));
-        QueueNumber.Instance.text.text = "fucking dumbass2";
+        QueueNumber.Instance.text.text = "We apologize for the inconvenience. Please exit the building as soon as possible.";
         yield return new WaitForSeconds(2f);
         yield return QueueNumber.Instance.AnimateFadeOut();
         yield return new WaitForSeconds(2f);
 
+        CameraManager.Instance.StartShake(1f, 1, 1, true);
+        rumble = AudioManager.instance.CreateEventInstance(FMODEventReferences.instance.Rumble);
+        rumble.start();
+        LeanTween.value(CameraManager.Instance.playerCamera.gameObject, (float val)=>{
+            CameraManager.Instance.SetShakeStrength(val);
+        }, 0f, 5f, 2.4f);
+        LeanTween.value(CameraManager.Instance.playerCamera.gameObject, (float val)=>{
+            CameraManager.Instance.SetShakeFrequency(val);
+        }, 5, 10, 2.4f);
         LeanTween.value(PlayerManager.Instance.gameObject, (float val)=>{
             PlayerManager.Instance.controller.SetRed(val);
         }, 0f, 100f, 2.4f);
         yield return new WaitForSeconds(2.4f);
-
+        rumble.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        rumble.release();
         var explode = Instantiate(explosion, PlayerManager.Instance.transform.position, Quaternion.identity);
         RuntimeManager.PlayOneShot(FMODEventReferences.instance.Explosion);
-        CameraManager.Instance.StartShake(50f, 0.7f, 20f);
+        CameraManager.Instance.StartShake(100f, 2f, 500f);
         PlayerManager.Instance.gameObject.SetActive(false);
         yield return new WaitForSeconds(0.8f);
         Destroy(explode);
