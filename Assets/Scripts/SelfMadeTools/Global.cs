@@ -26,4 +26,8 @@ public static class Global {
     public static Vector3 GetMouseWorldPosition() {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
+    public static float Map (this float value, float fromSource, float toSource, float fromTarget, float toTarget)
+    {
+        return (value - fromSource) / (toSource - fromSource) * (toTarget - fromTarget) + fromTarget;
+    }
 }

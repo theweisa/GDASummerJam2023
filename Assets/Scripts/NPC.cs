@@ -10,10 +10,12 @@ public class NPC : MonoBehaviour
     public List<string> script = new List<string>();
     public float textSpeed;
     public Rigidbody2D rb;
+    public bool talkedTo=false;
     public bool Alive;
     public bool Panic;
     public float moveSpeed;
     public Vector2 moveDirection;
+    public float rageValue = 10f;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -65,7 +67,7 @@ public class NPC : MonoBehaviour
         }
     }
 
-    IEnumerator ShowTextbox() {
+    public virtual IEnumerator ShowTextbox() {
         PlayerManager.Instance.controller.StopPlayer();
         RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", Random.Range(0, 25));
         var obj = Instantiate(textBoxObject, transform.position, Quaternion.identity, transform);
@@ -74,9 +76,19 @@ public class NPC : MonoBehaviour
         textBox = obj.GetComponent<TextBoxHandler>();
         textBox.NPC = this;
         yield return textBox.Activate();
+        yield return TextboxFinished();
+    }
+
+    virtual public IEnumerator TextboxFinished() {
         PlayerManager.Instance.cameraPosition.localPosition = Vector2.zero;
+        if(!talkedTo)
+        {
+            talkedTo = true;
+            RageLogic.Instance.AddRage(rageValue);
+        }
         PlayerManager.Instance.controller.ResumePlayer();
         textBox = null;
+        yield return null;
     }
 
     // Update is called once per frame

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerController : BaseCharacterController
 {
@@ -11,6 +12,7 @@ public class PlayerController : BaseCharacterController
     public bool canPunch = false;
     public bool canInteract = true;
     public bool rage;
+    private Color ogColor;
     protected override void Awake() {
         base.Awake();
         if (punchHitbox){
@@ -18,6 +20,7 @@ public class PlayerController : BaseCharacterController
             punchHitbox.GetComponent<Renderer>().enabled = false;
         }
         rage = false;
+        ogColor = sprite.color;
     }
 
     void OnMove(InputValue value) {
@@ -37,11 +40,27 @@ public class PlayerController : BaseCharacterController
 
     void Update()
     {
+        PositionPunchHitbox();
+        MakeRed();
+    }
+
+    void PositionPunchHitbox() {
         Vector3 positionMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 towardsMouseFromPlayer = positionMouse - transform.position;
         towardsMouseFromPlayer.z = 0;
         towardsMouseFromPlayer = towardsMouseFromPlayer.normalized;
         punchHitbox.transform.position = Vector3.MoveTowards(punchHitbox.transform.position, transform.position + towardsMouseFromPlayer * 2, 16);
+    }
+
+    void MakeRed() {
+        if (!rage) {
+            sprite.color = new Color(
+                1f,
+                Global.Map(RageLogic.Instance.rageMeter.value, 0f, 100f, 1f, 0f),
+                Global.Map(RageLogic.Instance.rageMeter.value, 0f, 100f, 1f, 0f),
+                1f
+            );
+        }
     }
 
     void OnFire(InputValue value){

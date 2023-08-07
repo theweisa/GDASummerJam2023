@@ -18,6 +18,16 @@ public class CameraManager : UnitySingleton<CameraManager>
         
     }
 
+    public void StartShake(float str=1f, float dur=1f, float freq=1f, bool perma=false) {
+        playerCamera.GetComponent<CameraShake>().StartShake(str,dur,freq,perma);
+    }
+    public void StopShake(float dur=0.75f) {
+        playerCamera.GetComponent<CameraShake>().StopShake(dur);
+    }
+    public void SetShakeStrength(float str) {
+        playerCamera.GetComponent<CameraShake>().strength = str;
+    }
+
     public virtual IEnumerator PanToTarget(Transform target, float dur) {
         Vector2 initEase = CameraManager.Instance.GetEase();
         CameraManager.Instance.SetEase(1.5f);

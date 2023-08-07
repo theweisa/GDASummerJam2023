@@ -50,10 +50,6 @@ public class TextBoxHandler : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         finished = true;
         currentLine = 0;
-        if(!hasActivated)
-        {
-            RageLogic.Instance.AddRage(2.5f);
-        }
         hasActivated = true;
     }
 
