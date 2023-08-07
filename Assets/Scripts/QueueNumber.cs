@@ -13,9 +13,11 @@ public class QueueNumber : MonoBehaviour
 
     public Coroutine queueCountdown;
     public RectTransform boxPos;
+    private Vector2 initScale;
 
     void Start()
     {
+        initScale = transform.localScale;
         queueCountdown = StartCoroutine(queueNumTimer());
         boxPos = GetComponent<RectTransform>();
     }
@@ -34,12 +36,15 @@ public class QueueNumber : MonoBehaviour
                     //gameObject.transform.localPosition = new Vector3(-240, -160, 0);
                     break;
                 case 3:
-                    SetRectPos(new Vector2(0,0));
+                    SetRectPos(new Vector2(0, 0));
                     break;
             }
             text.text = numberQueue[currentNum];
+            StartCoroutine(AnimatePopIn());
             currentNum += 1;
-            yield return new WaitForSeconds(interval);
+            yield return new WaitForSeconds(interval * 0.7f);
+            StartCoroutine(AnimateFadeOut());
+            yield return new WaitForSeconds(interval * 0.3f);
         }
     }
 
@@ -65,13 +70,16 @@ public class QueueNumber : MonoBehaviour
 
     }
 
-    public void SetAndStretchToParentSize(RectTransform _mRect, RectTransform _parent)
+    private IEnumerator AnimatePopIn()
     {
-        _mRect.anchoredPosition = _parent.position;
-        _mRect.anchorMin = new Vector2(1, 0);
-        _mRect.anchorMax = new Vector2(0, 1);
-        _mRect.pivot = new Vector2(0.5f, 0.5f);
-        _mRect.sizeDelta = _parent.rect.size;
-        _mRect.transform.SetParent(_parent);
+        transform.localScale = new Vector2(0, 0);
+        LeanTween.scale(gameObject, initScale, 0.2f);
+        yield return null;
+    }
+
+    private IEnumerator AnimateFadeOut()
+    {
+        LeanTween.scale(gameObject, new Vector2(0,0), 0.2f);
+        yield return new WaitForSeconds(0.2f);
     }
 }
