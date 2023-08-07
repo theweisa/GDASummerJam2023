@@ -13,7 +13,7 @@ public class DeskWorker : NPC
     public override void Start()
     {
         base.Start();
-        hitstun = 0.4f;
+        hitstun = 0.8f;
         script = initialScript;
     }
 
@@ -40,6 +40,17 @@ public class DeskWorker : NPC
                 //textBox.Activate();
             }
         }
+    }
+
+    void Update() {
+        if (GameManager.Instance.followDeskWorker) {
+            Debug.Log("?");
+            PlayerManager.Instance.cameraPosition.position = transform.position;
+        }
+    }
+
+    public override IEnumerator SporadicMovement() {
+        yield return null;
     }
 
     public override IEnumerator ShowTextbox() {

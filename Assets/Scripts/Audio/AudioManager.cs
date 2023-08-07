@@ -28,17 +28,31 @@ public class AudioManager : MonoBehaviour
         return eventInstance;
     }
 
-    private void CleanUp()
+    public void CleanUp(bool SoftStop) //false for hard stop, true for soft stop
     {
-        foreach (EventInstance eventInstance in eventInstances)
+        if(SoftStop)
         {
-            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            eventInstance.release();
+            foreach (EventInstance eventInstance in eventInstances)
+            {
+                eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                eventInstance.release();
+                eventInstances = new List<EventInstance>();
+            }            
         }
+        else
+        {
+            foreach (EventInstance eventInstance in eventInstances)
+            {
+                eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                eventInstance.release();
+                eventInstances = new List<EventInstance>();
+            }
+        }
+
     }
     
     private void OnDestroy()
     {
-        CleanUp();
+        CleanUp(true);
     }
 }

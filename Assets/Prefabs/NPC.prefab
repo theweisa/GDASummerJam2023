@@ -261,6 +261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractPrompt
       objectReference: {fileID: 0}
+    - target: {fileID: 7046161597819874741, guid: f6c4ddfab1e66064abbc51ba7c92ffa7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8515449812896161563, guid: f6c4ddfab1e66064abbc51ba7c92ffa7, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.14

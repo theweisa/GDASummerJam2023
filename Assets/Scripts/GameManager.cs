@@ -3,24 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using FMOD.Studio;
+using FMODUnity;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public enum GameState { Start, Wait, FeelingRage, Rage, PostRage };
+public enum GameState { Start, Wait, FeelingRage, PanicStart, Rage, PostRage };
 public class GameManager : UnitySingleton<GameManager>
 {
     public Transform cinematicBars;
     public GameState gameState;
     public RectTransform logo;
+    private EventInstance rageMusic;
+    private EventInstance rumble;
     public TMP_Text tutorialText;
     public GameObject explosion;
     public RectTransform gameOver;
+    [HideInInspector] public bool followDeskWorker=false;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(StartGame());
-        //StartCoroutine(PostRage());
+        //StartCoroutine(StartGame());
+        StartCoroutine(PostRage());
         //PlayerManager.Instance.controller.StopPlayer();
         //StartCoroutine(FeelingRagePhase());
     }
@@ -39,6 +44,7 @@ public class GameManager : UnitySingleton<GameManager>
         RageLogic.Instance.gameObject.SetActive(false);
         PlayerManager.Instance.controller.StopPlayer();
         yield return new WaitUntil(()=>Input.GetMouseButtonDown(0));
+        RuntimeManager.PlayOneShot(FMODEventReferences.instance.MouseClick);
         LeanTween.moveY(logo.gameObject, logo.transform.position.y+100f, 1.5f).setEaseInBack().setOnComplete(()=>logo.gameObject.SetActive(false));
         LeanTween.value(PlayerManager.Instance.cameraPosition.gameObject, (float val) => {
             PlayerManager.Instance.cameraPosition.transform.localPosition = new Vector2(0, val);
@@ -91,8 +97,11 @@ public class GameManager : UnitySingleton<GameManager>
         RageLogic.Instance.rageMeter.value = 100f;
         LeanTween.value(RageLogic.Instance.fill.gameObject, (float val)=>{RageLogic.Instance.fill.localScale = new Vector2(val,1);}, 0, 5, 1.5f);
         yield return new WaitForSeconds(0.7f);
+        RuntimeManager.StudioSystem.setParameterByName("RageEnd", 1);
         yield return new WaitForSeconds(2f);
-
+        AudioManager.instance.CleanUp(true);
+        rumble = AudioManager.instance.CreateEventInstance(FMODEventReferences.instance.Rumble);
+        rumble.start();
         // cock shotgun sound idk
         PlayerManager.Instance.controller.fists.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.5f);
@@ -105,20 +114,27 @@ public class GameManager : UnitySingleton<GameManager>
     }
 
     public IEnumerator StartPanic() {
-        gameState = GameState.Rage;
+        gameState = GameState.PanicStart;
+        rumble.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         PlayerManager.Instance.controller.StopPlayer();
         PlayerManager.Instance.controller.rage = false;
         StartCoroutine(StartCinematicEdges());
+        followDeskWorker = true;
+        yield return new WaitForSeconds(2.5f);
+        followDeskWorker = false;
         PlayerManager.Instance.cameraPosition.transform.position = Vector3.zero;
         yield return new WaitForSeconds(3.5f);
-
+        RuntimeManager.PlayOneShot(FMODEventReferences.instance.Panic);
         EnvironmentManager.Instance.UnFreezeAllObjects();
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag("NPC");
         foreach(GameObject go in gos){
             go.SendMessage("StartPanic");
         }
+        gameState = GameState.Rage;
         yield return new WaitForSeconds(2f);
+        rageMusic = AudioManager.instance.CreateEventInstance(FMODEventReferences.instance.RageModeMusic);
+        rageMusic.start();
         PlayerManager.Instance.cameraPosition.transform.localPosition = Vector3.zero;
         yield return new WaitForSeconds(2f);
         PlayerManager.Instance.controller.rage = true;
@@ -129,16 +145,43 @@ public class GameManager : UnitySingleton<GameManager>
     public IEnumerator PostRage() {
         gameState = GameState.PostRage;
         PlayerManager.Instance.controller.StopPlayer();
-        StartCoroutine(StartCinematicEdges(2f, LeanTweenType.easeOutQuart, 1.4f));
+        rageMusic.setParameterByName("Music_End", 1);
+        StartCoroutine(StartCinematicEdges());//2f, LeanTweenType.easeOutQuart, 1.4f
         yield return new WaitForSeconds(2f);
+        rageMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+        yield return QueueNumber.Instance.AnimatePopIn();
+        QueueNumber.Instance.SetRectPos(new Vector2(0.5f, 1f));
+        QueueNumber.Instance.text.text = "Attention: due to a systems failure we are no longer able to process forms.";
+        yield return new WaitForSeconds(3f);
+        yield return QueueNumber.Instance.AnimateFadeOut();
+        yield return new WaitForSeconds(0.3f);    
+
         yield return QueueNumber.Instance.AnimatePopIn();
         QueueNumber.Instance.SetRectPos(new Vector2(0.5f, 0f));
-        QueueNumber.Instance.text.text = "fucking dumbass";
+        QueueNumber.Instance.text.text = "We apologize for the inconvenience. Please exit the building as soon as possible.";
         yield return new WaitForSeconds(2f);
         yield return QueueNumber.Instance.AnimateFadeOut();
         yield return new WaitForSeconds(2f);
+
+        CameraManager.Instance.StartShake(1f, 1, 1, true);
+        rumble = AudioManager.instance.CreateEventInstance(FMODEventReferences.instance.Rumble);
+        rumble.start();
+        LeanTween.value(CameraManager.Instance.playerCamera.gameObject, (float val)=>{
+            CameraManager.Instance.SetShakeStrength(val);
+        }, 0f, 5f, 2.4f);
+        LeanTween.value(CameraManager.Instance.playerCamera.gameObject, (float val)=>{
+            CameraManager.Instance.SetShakeFrequency(val);
+        }, 5, 10, 2.4f);
+        LeanTween.value(PlayerManager.Instance.gameObject, (float val)=>{
+            PlayerManager.Instance.controller.SetRed(val);
+        }, 0f, 100f, 2.4f);
+        yield return new WaitForSeconds(2.4f);
+        rumble.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        rumble.release();
         var explode = Instantiate(explosion, PlayerManager.Instance.transform.position, Quaternion.identity);
-        CameraManager.Instance.StartShake(50f, 0.7f, 20f);
+        RuntimeManager.PlayOneShot(FMODEventReferences.instance.Explosion);
+        CameraManager.Instance.StartShake(100f, 2f, 500f);
         PlayerManager.Instance.gameObject.SetActive(false);
         yield return new WaitForSeconds(0.8f);
         Destroy(explode);
