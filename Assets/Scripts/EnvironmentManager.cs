@@ -9,7 +9,10 @@ public class EnvironmentManager : UnitySingleton<EnvironmentManager>
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(AudioManager.instance);
+        Debug.Log(FMODEventReferences.instance.Ambience);
         ambience = AudioManager.instance.CreateEventInstance(FMODEventReferences.instance.Ambience);
+        //ambience = FMODUnity.RuntimeManager.CreateInstance("event:/World_Ambience");
         ambience.start();
     }
 
