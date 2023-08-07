@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using FMOD.Studio;
+using FMODUnity;
 using TMPro;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +14,8 @@ public class GameManager : UnitySingleton<GameManager>
     public Transform cinematicBars;
     public GameState gameState;
     public RectTransform logo;
+    private EventInstance rageMusic;
+    private EventInstance rumble;
     public TMP_Text tutorialText;
     public GameObject explosion;
     public RectTransform gameOver;
@@ -91,8 +95,11 @@ public class GameManager : UnitySingleton<GameManager>
         RageLogic.Instance.rageMeter.value = 100f;
         LeanTween.value(RageLogic.Instance.fill.gameObject, (float val)=>{RageLogic.Instance.fill.localScale = new Vector2(val,1);}, 0, 5, 1.5f);
         yield return new WaitForSeconds(0.7f);
+        RuntimeManager.StudioSystem.setParameterByName("RageEnd", 1);
         yield return new WaitForSeconds(2f);
-
+        AudioManager.instance.CleanUp(true);
+        rumble = AudioManager.instance.CreateEventInstance(FMODEventReferences.instance.Rumble);
+        rumble.start();
         // cock shotgun sound idk
         PlayerManager.Instance.controller.fists.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.5f);
@@ -106,12 +113,13 @@ public class GameManager : UnitySingleton<GameManager>
 
     public IEnumerator StartPanic() {
         gameState = GameState.PanicStart;
+        rumble.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         PlayerManager.Instance.controller.StopPlayer();
         PlayerManager.Instance.controller.rage = false;
         StartCoroutine(StartCinematicEdges());
         PlayerManager.Instance.cameraPosition.transform.position = Vector3.zero;
         yield return new WaitForSeconds(3.5f);
-
+        RuntimeManager.PlayOneShot(FMODEventReferences.instance.Panic);
         EnvironmentManager.Instance.UnFreezeAllObjects();
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag("NPC");
@@ -120,6 +128,8 @@ public class GameManager : UnitySingleton<GameManager>
         }
         gameState = GameState.Rage;
         yield return new WaitForSeconds(2f);
+        rageMusic = AudioManager.instance.CreateEventInstance(FMODEventReferences.instance.RageModeMusic);
+        rageMusic.start();
         PlayerManager.Instance.cameraPosition.transform.localPosition = Vector3.zero;
         yield return new WaitForSeconds(2f);
         PlayerManager.Instance.controller.rage = true;
@@ -130,8 +140,10 @@ public class GameManager : UnitySingleton<GameManager>
     public IEnumerator PostRage() {
         gameState = GameState.PostRage;
         PlayerManager.Instance.controller.StopPlayer();
+        rageMusic.setParameterByName("Music_End", 1);
         StartCoroutine(StartCinematicEdges(2f, LeanTweenType.easeOutQuart, 1.4f));
         yield return new WaitForSeconds(2f);
+        rageMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         yield return QueueNumber.Instance.AnimatePopIn();
         QueueNumber.Instance.SetRectPos(new Vector2(0.5f, 0f));
         QueueNumber.Instance.text.text = "fucking dumbass";
