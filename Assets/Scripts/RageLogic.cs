@@ -16,6 +16,7 @@ public class RageLogic : UnitySingleton<RageLogic>
     [SerializeField]
     private UnityEvent<float> OnProgress;
     private EventInstance rageSound;
+    public bool fullRage = false;
     
     private void Start()
     {
@@ -38,19 +39,15 @@ public class RageLogic : UnitySingleton<RageLogic>
         float initialProgress = rageMeter.value;
         float newProgress = initialProgress + progress;
         LeanTween.value(rageMeter.gameObject, (float val)=>{ rageMeter.value = val; }, initialProgress, newProgress, speed).setEaseOutExpo();
-
         yield return null;
-        /*while (time < 1){
-            rageMeter.value = Mathf.Lerp(initialProgress, progress, time);
-            time += Time.deltaTime * speed;
-            
-            OnProgress?.Invoke(rageMeter.value);
-            yield return null;
-        }*/
     }
 
     private void Update()
     {
         rageSound.setParameterByName("Rage", rageMeter.value/100);
+        if(rageMeter.value >= 100)
+        {
+            fullRage = true;
+        }
     }
 }
