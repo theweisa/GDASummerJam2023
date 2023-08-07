@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public enum GameState { Start, Wait, FeelingRage, Rage, PostRage };
 public class GameManager : UnitySingleton<GameManager>
@@ -12,10 +13,14 @@ public class GameManager : UnitySingleton<GameManager>
     public GameState gameState;
     public RectTransform logo;
     public TMP_Text tutorialText;
+    public GameObject explosion;
+    public RectTransform gameOver;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(StartGame());
+        //StartCoroutine(PostRage());
         //PlayerManager.Instance.controller.StopPlayer();
         //StartCoroutine(FeelingRagePhase());
     }
@@ -131,6 +136,18 @@ public class GameManager : UnitySingleton<GameManager>
         QueueNumber.Instance.text.text = "fucking dumbass";
         yield return new WaitForSeconds(2f);
         yield return QueueNumber.Instance.AnimateFadeOut();
+        yield return new WaitForSeconds(2f);
+        var explode = Instantiate(explosion, PlayerManager.Instance.transform.position, Quaternion.identity);
+        CameraManager.Instance.StartShake(50f, 0.7f, 20f);
+        PlayerManager.Instance.gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.8f);
+        Destroy(explode);
+        Vector3 prevPos = gameOver.localPosition;
+        gameOver.localPosition = new Vector2(prevPos.x, prevPos.y+350f);
+        gameOver.gameObject.SetActive(true);
+        LeanTween.moveLocalY(gameOver.gameObject, prevPos.y, 0.75f).setEaseOutElastic();
+        yield return new WaitUntil(()=>Input.GetMouseButtonDown(0));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         ///StartCoroutine(EndCinematicEdges());
     }
 
