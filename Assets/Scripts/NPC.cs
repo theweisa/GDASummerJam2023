@@ -39,12 +39,6 @@ public class NPC : MonoBehaviour
         Vector3 dir = rb.velocity.normalized;
         dir.z = 0f;
         controller.moveDirection = dir;
-        /*if (script.Count == 0) {
-            interactPrompt.SetActive(false);
-        }
-        else {
-            interactPrompt.SetActive(true);
-        }*/
     }
 
     public virtual IEnumerator OnHit() {
@@ -110,6 +104,9 @@ public class NPC : MonoBehaviour
     public virtual void OnMouseOver()
     {
         if (GameManager.Instance.gameState != GameState.Wait) return;
+        if (interactPrompt != null && script.Count != 0) {
+            interactPrompt.SetActive(true);
+        }
         if (Input.GetMouseButtonDown(0) 
             && PlayerManager.Instance.controller.canInteract
             && script.Count != 0)
@@ -120,6 +117,11 @@ public class NPC : MonoBehaviour
                 StartCoroutine(ShowTextbox());
                 //textBox.Activate();
             }
+        }
+    }
+    public virtual void OnMouseExit() {
+        if (interactPrompt.gameObject.activeSelf) {
+            interactPrompt.SetActive(false);
         }
     }
     public void FacePlayer() {
@@ -133,6 +135,8 @@ public class NPC : MonoBehaviour
     public virtual IEnumerator ShowTextbox() {
         if (sporadicMove != null)
             StopCoroutine(sporadicMove);
+        if (interactPrompt)
+            interactPrompt.SetActive(false);
         controller.rb.velocity = Vector2.zero;
         PlayerManager.Instance.controller.StopPlayer();
         RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", pitch);

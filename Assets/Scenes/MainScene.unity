@@ -213,6 +213,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 445e4bff6740e334c9ba47e30ab1c681, type: 3}
+--- !u!1 &353897843 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2241958637388187439, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+  m_PrefabInstance: {fileID: 3771483094899123209}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &539215857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1364,6 +1369,10 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: interactPrompt
+      value: 
+      objectReference: {fileID: 353897843}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: initialScript.Array.data[0]
       value: Hello! Welcome to the DMC!
       objectReference: {fileID: 0}
@@ -1464,7 +1473,52 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9132639970294816019, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3693207527452824094, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2846852969243032204, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8376706093547471072, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3848771058299635970, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4951108305055339624, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 7515012203424003828, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 6856794994247895288, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2546220874044629495, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5661206932540593759, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5760599550882256089, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 694850273668349736, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4739191063637629591, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5970001480406659522, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8798140220001834679, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -32,6 +32,7 @@ public class RageLogic : UnitySingleton<RageLogic>
 
     public void AddRage(float progress, float speed)
     {
+        if (!gameObject.activeSelf) return;
         StartCoroutine(AnimateProgress(progress, speed));
     }
 
