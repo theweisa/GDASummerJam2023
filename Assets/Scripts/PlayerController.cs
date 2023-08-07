@@ -12,6 +12,7 @@ public class PlayerController : BaseCharacterController
     public bool canPunch = false;
     public bool canInteract = true;
     public bool rage;
+    [HideInInspector] public bool makeRed=true;
     private Color ogColor;
     protected override void Awake() {
         base.Awake();
@@ -41,7 +42,9 @@ public class PlayerController : BaseCharacterController
     void Update()
     {
         PositionPunchHitbox();
-        MakeRed();
+        if (makeRed) {
+            SetRed(RageLogic.Instance.rageMeter.value);
+        }
     }
 
     void PositionPunchHitbox() {
@@ -52,15 +55,13 @@ public class PlayerController : BaseCharacterController
         punchHitbox.transform.position = Vector3.MoveTowards(punchHitbox.transform.position, transform.position + towardsMouseFromPlayer * 2, 16);
     }
 
-    void MakeRed() {
-        if (!rage) {
-            sprite.color = new Color(
-                1f,
-                Global.Map(RageLogic.Instance.rageMeter.value, 0f, 100f, 1f, 0f),
-                Global.Map(RageLogic.Instance.rageMeter.value, 0f, 100f, 1f, 0f),
-                1f
-            );
-        }
+    public void SetRed(float percentRed) {
+        sprite.color = new Color(
+            1f,
+            Global.Map(percentRed, 0f, 100f, 1f, 0f),
+            Global.Map(percentRed, 0f, 100f, 1f, 0f),
+            1f
+        );
     }
 
     void OnFire(InputValue value){

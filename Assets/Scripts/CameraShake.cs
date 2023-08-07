@@ -48,8 +48,8 @@ public class CameraShake : MonoBehaviour
     }
     public void StopShake(float dur=0.75f) {
         permaShake = false;
-        duration = dur;
-        baseDuration = dur;
+        duration = Mathf.Max(dur, Time.deltaTime);
+        baseDuration = duration;
     }
     public bool Shaking() {
         return duration > 0;

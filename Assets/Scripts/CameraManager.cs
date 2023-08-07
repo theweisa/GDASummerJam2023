@@ -27,6 +27,9 @@ public class CameraManager : UnitySingleton<CameraManager>
     public void SetShakeStrength(float str) {
         playerCamera.GetComponent<CameraShake>().strength = str;
     }
+    public void SetShakeFrequency(float freq) {
+        playerCamera.GetComponent<CameraShake>().frequency = freq;
+    }
 
     public virtual IEnumerator PanToTarget(Transform target, float dur) {
         Vector2 initEase = CameraManager.Instance.GetEase();
@@ -36,10 +39,10 @@ public class CameraManager : UnitySingleton<CameraManager>
         CameraManager.Instance.SetEase(initEase);
     }
 
-    public void Zoom(float newVal, float dur=1f) {
+    public void Zoom(float newVal, float dur=1f, LeanTweenType ease=LeanTweenType.easeOutQuart) {
         LeanTween.value(gameObject, (float val) => {
             playerCamera.m_Lens.OrthographicSize = val;
-        }, playerCamera.m_Lens.OrthographicSize, newVal, dur).setEase(LeanTweenType.easeOutQuart);
+        }, playerCamera.m_Lens.OrthographicSize, newVal, dur).setEase(ease);
     }
 
     public void SetEase(float x, float y) {

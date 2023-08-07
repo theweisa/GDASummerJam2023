@@ -8,7 +8,6 @@ public class DeskWorker : NPC
     public List<string> initialScript = new List<string>();
     public List<string> waitScript = new List<string>();
     public List<string> rageScript = new List<string>();
-    public int mode = 0;
 
     public override void Start()
     {
@@ -22,7 +21,23 @@ public class DeskWorker : NPC
     }
 
     public override IEnumerator ShowTextbox() {
-        StartCoroutine(GameManager.Instance.StartCinematicEdges());
+        switch (GameManager.Instance.gameState) {
+            case GameState.Start: {
+                StartCoroutine(GameManager.Instance.StartCinematicEdges());
+                script = initialScript;
+                break;
+            }
+            case GameState.Wait: {
+                script = waitScript;
+                break;
+            }
+            case GameState.FeelingRage: {
+                script = rageScript;
+                break;
+            }
+            default: 
+                break;
+        }
         StartCoroutine(base.ShowTextbox());
         PlayerManager.Instance.cameraPosition.position = transform.position;
         yield return null;
@@ -31,11 +46,23 @@ public class DeskWorker : NPC
     public override IEnumerator TextboxFinished()
     {
         yield return base.TextboxFinished();
-        if (mode == 0) {
-            yield return GameManager.Instance.EndCinematicEdges();
-            PlayerManager.Instance.controller.ResumePlayer();
-            script = waitScript;
+        switch (GameManager.Instance.gameState) {
+            case GameState.Start: {
+                yield return GameManager.Instance.EndCinematicEdges();
+                PlayerManager.Instance.controller.ResumePlayer();
+                QueueNumber.Instance.StartQueue();
+                GameManager.Instance.gameState = GameState.Wait;
+                break;
+            }
+            case GameState.Wait: {
+                break;
+            }
+            case GameState.FeelingRage: {
+                // do some shit
+                break;
+            }
+            default:
+                break;
         }
-        
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class QueueNumber : MonoBehaviour
+public class QueueNumber : UnitySingleton<QueueNumber>
 {
     private float interval = 10f;
     private int currentNum = 0;
@@ -17,12 +17,19 @@ public class QueueNumber : MonoBehaviour
 
     void Start()
     {
+        gameObject.SetActive(false);
         initScale = transform.localScale;
-        queueCountdown = StartCoroutine(queueNumTimer());
         boxPos = GetComponent<RectTransform>();
     }
 
+    public void StartQueue() {
+        gameObject.SetActive(true);
+        transform.localScale = new Vector2(0,0);
+        queueCountdown = StartCoroutine(queueNumTimer());
+    }
+
     private IEnumerator queueNumTimer(){
+        yield return new WaitForSeconds(interval * 0.5f);
         //Replace this later with environment variable to stop iteration
         while(!RageLogic.Instance.fullRage){
             switch(SelectPosition())
@@ -41,14 +48,20 @@ public class QueueNumber : MonoBehaviour
             }
             text.text = numberQueue[currentNum];
             StartCoroutine(AnimatePopIn());
-            currentNum += 1;
+            currentNum = currentNum+1 < numberQueue.Count ? currentNum+1 : 0;
             yield return new WaitForSeconds(interval * 0.7f);
             StartCoroutine(AnimateFadeOut());
             yield return new WaitForSeconds(interval * 0.3f);
         }
     }
 
-    void SetRectPos(Vector2 pivot) {
+    public void StopQueue() {
+        StopAllCoroutines();
+        queueCountdown = null;
+        StartCoroutine(AnimateFadeOut());
+    }
+
+    public void SetRectPos(Vector2 pivot) {
         boxPos.anchorMin = pivot;
         boxPos.anchorMax = pivot;
         boxPos.pivot = pivot;
@@ -70,14 +83,14 @@ public class QueueNumber : MonoBehaviour
 
     }
 
-    private IEnumerator AnimatePopIn()
+    public IEnumerator AnimatePopIn()
     {
         transform.localScale = new Vector2(0, 0);
         LeanTween.scale(gameObject, initScale, 0.2f);
         yield return null;
     }
 
-    private IEnumerator AnimateFadeOut()
+    public IEnumerator AnimateFadeOut()
     {
         LeanTween.scale(gameObject, new Vector2(0,0), 0.2f);
         yield return new WaitForSeconds(0.2f);
