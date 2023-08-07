@@ -295,10 +295,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6741614859732150733, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4c807c8ed4b19be42a4a4acf637ea274, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
 --- !u!114 &230262168 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -8566187661095568472, guid: 0c8090e9a755b964f9cf78235b4084c2, type: 3}
@@ -638,6 +639,13 @@ MonoBehaviour:
       Data3: 2146796686
       Data4: -430048931
     Path: event:/Player_PunchWhiff
+  <PunchHit>k__BackingField:
+    Guid:
+      Data1: 1080095269
+      Data2: 1075028186
+      Data3: 943988386
+      Data4: 1359840167
+    Path: event:/Player_PunchHit
   <Ambience>k__BackingField:
     Guid:
       Data1: -910595068
