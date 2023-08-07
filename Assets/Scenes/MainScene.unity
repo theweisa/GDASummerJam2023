@@ -506,6 +506,13 @@ MonoBehaviour:
       Data3: 2146796686
       Data4: -430048931
     Path: event:/Player_PunchWhiff
+  <PunchHit>k__BackingField:
+    Guid:
+      Data1: 1080095269
+      Data2: 1075028186
+      Data3: 943988386
+      Data4: 1359840167
+    Path: event:/Player_PunchHit
   <Ambience>k__BackingField:
     Guid:
       Data1: -910595068
@@ -860,10 +867,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1093361489259204700, guid: 445e4bff6740e334c9ba47e30ab1c681, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1826250510}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 445e4bff6740e334c9ba47e30ab1c681, type: 3}
 --- !u!1001 &3771483094899123209
 PrefabInstance:

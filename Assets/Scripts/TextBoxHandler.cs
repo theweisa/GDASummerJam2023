@@ -43,7 +43,6 @@ public class TextBoxHandler : MonoBehaviour
 
     private IEnumerator DisplayLine(string line)
     {
-        RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", Random.Range(0, 25));
         text.text = "";
         foreach (char letter in line.ToCharArray())
         {

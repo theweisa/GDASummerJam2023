@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class NPC : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class NPC : MonoBehaviour
         {
             if (textBox == null)
             {
+                RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", Random.Range(0, 25));
                 var obj = Instantiate(textBoxObject, transform.position, Quaternion.identity);
                 textBox = obj.GetComponent<TextBoxHandler>();
                 textBox.NPC = this;
