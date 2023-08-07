@@ -8,6 +8,8 @@ public class PlayerController : BaseCharacterController
 {
     [Header("Player References")]
     [Space(4)]
+    public float punchForce = 50f;
+    [HideInInspector] public float basePunchForce;
     public Collider2D punchHitbox;
     public bool canPunch = false;
     public bool canInteract = true;
@@ -19,6 +21,7 @@ public class PlayerController : BaseCharacterController
     //public Animator RFistAnim;
     protected override void Awake() {
         base.Awake();
+        basePunchForce = punchForce;
         if (punchHitbox){
             punchHitbox.enabled = false;
             punchHitbox.GetComponent<Renderer>().enabled = false;
@@ -88,7 +91,7 @@ public class PlayerController : BaseCharacterController
 
         FMODUnity.RuntimeManager.PlayOneShot(FMODEventReferences.instance.PunchWhiff);
         Vector3 towardsMouseFromPlayer = ((Vector3)((Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition)) - (Vector2)transform.position)).normalized;
-        rb.AddForce(50f*towardsMouseFromPlayer, ForceMode2D.Impulse);
+        rb.AddForce(punchForce*towardsMouseFromPlayer, ForceMode2D.Impulse);
         punchHitbox.enabled = true;
         Debug.Log("Punching");
         yield return new WaitForSeconds(0.1f);
