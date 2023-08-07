@@ -492,11 +492,11 @@ MonoBehaviour:
     Path: event:/Music_Rage
   <MouseClick>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -333117327
+      Data2: 1325032333
+      Data3: 1511153551
+      Data4: 1072059940
+    Path: event:/Player_Click
   <Walking>k__BackingField:
     Guid:
       Data1: -655943939
@@ -699,6 +699,14 @@ PrefabInstance:
     - target: {fileID: 3394383880442486950, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -264
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662459174080162625, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.399994
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662459174080162625, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25.199997
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
