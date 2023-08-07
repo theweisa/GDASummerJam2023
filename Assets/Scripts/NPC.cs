@@ -18,8 +18,11 @@ public class NPC : MonoBehaviour
     public float moveSpeed;
     public Vector2 moveDirection;
     public float rageValue = 10f;
+    public Animator anim;
     [Header("try to set to value from 0-25; the higher the squeakier i think")]
     public int pitch = 10;
+
+    protected float hitstun = 0.21f;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,25 +39,31 @@ public class NPC : MonoBehaviour
         controller.moveDirection = dir;
     }
 
-    public IEnumerator OnHit() {
+    public virtual IEnumerator OnHit() {
         Debug.Log("hit!");
         controller.canMove = false;
         controller.moveAnim.Stop();
         rb.drag = 3;
         if (Alive){
-            Alive = false;            
+            Alive = false;   
+            Time.timeScale = 0f;
+            yield return new WaitForSecondsRealtime(hitstun);
+            Time.timeScale = 1f;
+            CameraManager.Instance.StartShake(60f, 0.4f, 500f);
         }
-        if (!CheckAlive()){
-            Debug.Log("Game Over");
+        else {
+            CameraManager.Instance.StartShake(30f, 0.4f, 100f);
         }
-        Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(0.1f);
-        Time.timeScale = 1f;
-        CameraManager.Instance.StartShake(1f, 1f, 2f);
+        anim.SetBool("dead", true);
+        
         Vector2 dir = ((Vector2)Global.GetMouseWorldPosition() - (Vector2)PlayerManager.Instance.transform.position).normalized;
 
         rb.AddForce(dir * 40, ForceMode2D.Impulse);
-        yield return null;
+
+        if (!CheckAlive()){
+            Debug.Log("Game Over");
+            StartCoroutine(GameManager.Instance.PostRage());
+        }
     }
     public bool CheckAlive() {
         GameObject[] gos;
@@ -72,6 +81,7 @@ public class NPC : MonoBehaviour
         Panic = false;
         rb = rb != null ? rb : Global.FindComponent<Rigidbody2D>(gameObject);
         controller = Global.FindComponent<BaseCharacterController>(gameObject);
+        anim = Global.FindComponent<Animator>(gameObject);
     }
 
     public virtual void OnMouseOver()
@@ -83,6 +93,11 @@ public class NPC : MonoBehaviour
         {
             if (textBox == null)
             {
+                if (controller.sprite.flipX != (PlayerManager.Instance.transform.position-transform.position).x > 0f) {
+                    controller.sprite.flipX = !controller.sprite.flipX;
+                    controller.accessory.flipX = controller.sprite.flipX;
+                    controller.moveAnim.Flip();
+                }
                 StartCoroutine(ShowTextbox());
                 //textBox.Activate();
             }

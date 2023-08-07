@@ -7,8 +7,8 @@ public class NPCController : BaseCharacterController
     public NPC npc;
     protected override void FixedUpdate() {
         moveDirection = rb.velocity.normalized;
-        CheckFlip();
         if (npc.Alive) {
+            CheckFlip();
             if (moveDirection.magnitude != 0f) {
                 moveAnim.Move();
             }

@@ -29,6 +29,10 @@ PrefabInstance:
       value: NPC
       objectReference: {fileID: 0}
     - target: {fileID: 1036015642509428133, guid: f0bfba9a78f3dff45b473cfff21690bf, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3c2d0434ba260d748ae3484b4152cf7b, type: 3}
+    - target: {fileID: 1036015642509428133, guid: f0bfba9a78f3dff45b473cfff21690bf, type: 3}
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
@@ -145,6 +149,7 @@ MonoBehaviour:
   moveSpeed: 0
   moveDirection: {x: 0, y: 0}
   rageValue: 10
+  anim: {fileID: 6832228275921046186}
   pitch: 10
 --- !u!114 &3204713622977943294
 MonoBehaviour:
@@ -159,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 918049135299690032}
+  rb: {fileID: 0}
   sortLayerFactor: 1
 --- !u!114 &6688276809589935201
 MonoBehaviour:
@@ -188,5 +194,10 @@ SpriteRenderer:
 --- !u!50 &3202886579294997810 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 2649365472587927708, guid: f0bfba9a78f3dff45b473cfff21690bf, type: 3}
+  m_PrefabInstance: {fileID: 627864585461259694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6832228275921046186 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6225783281222162180, guid: f0bfba9a78f3dff45b473cfff21690bf, type: 3}
   m_PrefabInstance: {fileID: 627864585461259694}
   m_PrefabAsset: {fileID: 0}

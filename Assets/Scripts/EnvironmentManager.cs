@@ -16,7 +16,7 @@ public class EnvironmentManager : UnitySingleton<EnvironmentManager>
         
     }
 
-    void UnFreezeAllObjects() {
+    public void UnFreezeAllObjects() {
         UnFreezeObject(transform);
     }
 

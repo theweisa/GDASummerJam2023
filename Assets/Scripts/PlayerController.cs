@@ -52,6 +52,7 @@ public class PlayerController : BaseCharacterController
     }
 
     void PositionPunchHitbox() {
+        if (!rage) return;
         Vector3 positionMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 towardsMouseFromPlayer = positionMouse - transform.position;
         towardsMouseFromPlayer.z = 0;
@@ -83,26 +84,15 @@ public class PlayerController : BaseCharacterController
     }
 
     IEnumerator punch(){
-        /*Vector2 mousePos = (Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        Vector3 prevUp = fists.transform.up;
-        fists.transform.up = -(Vector3)(mousePos - (Vector2)fists.transform.position);
-        LFistAnim.Play("LFistPunch");*/
         fists.Play("fistsPunch", -1, 0f);
 
         FMODUnity.RuntimeManager.PlayOneShot(FMODEventReferences.instance.PunchWhiff);
         Vector3 towardsMouseFromPlayer = ((Vector3)((Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition)) - (Vector2)transform.position)).normalized;
-        /*Vector3 positionMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 towardsMouseFromPlayer = positionMouse - transform.position;
-        towardsMouseFromPlayer.z = 0;
-        towardsMouseFromPlayer = towardsMouseFromPlayer.normalized;*/
         rb.AddForce(50f*towardsMouseFromPlayer, ForceMode2D.Impulse);
-        //transform.position = Vector3.MoveTowards(transform.position, transform.position + towardsMouseFromPlayer * 2, 16);
         punchHitbox.enabled = true;
         Debug.Log("Punching");
         yield return new WaitForSeconds(0.1f);
         punchHitbox.enabled = false;
-        //yield return new WaitForSeconds(1f);
-        //fists.transform.up = prevUp;
     }
 
     public void StopPlayer() {

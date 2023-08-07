@@ -9,6 +9,7 @@ public class RageLogic : UnitySingleton<RageLogic>
 {
     public GameObject rage;
     public Slider rageMeter;
+    public RectTransform fill;
     public float progress = 0;
     public float rageSpeed = 0.2f;
     [SerializeField]

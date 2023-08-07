@@ -12,7 +12,15 @@ public class DeskWorker : NPC
     public override void Start()
     {
         base.Start();
+        hitstun = 0.4f;
         script = initialScript;
+    }
+
+    public override IEnumerator OnHit()
+    {
+        yield return base.OnHit();
+        hitstun = 0.1f;
+        GetComponent<Collider2D>().isTrigger = false;
     }
 
     public override void OnMouseOver()
@@ -62,6 +70,7 @@ public class DeskWorker : NPC
                 PlayerManager.Instance.controller.ResumePlayer();
                 QueueNumber.Instance.StartQueue();
                 GameManager.Instance.gameState = GameState.Wait;
+                LeanTween.moveY(RageLogic.Instance.gameObject, RageLogic.Instance.transform.position.y-10f, 1.4f).setEaseOutElastic();
                 break;
             }
             case GameState.Wait: {
