@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using FMOD.Studio;
+using FMODUnity;
 
 public class TextBoxHandler : MonoBehaviour
 {
@@ -51,6 +53,7 @@ public class TextBoxHandler : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             text.text += letter;
+            RuntimeManager.PlayOneShot(FMODEventReferences.instance.DialogueBlip);
             yield return new WaitForSeconds(NPC.textSpeed);
         }
         canContinue = true;

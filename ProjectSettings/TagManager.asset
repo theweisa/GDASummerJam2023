@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - NPC
+  - Punch
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Environment
   - Water
   - UI
   - 
@@ -44,4 +45,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: ForeGround
+    uniqueID: 3658762571
     locked: 0
