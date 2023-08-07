@@ -16,6 +16,8 @@ public class NPC : MonoBehaviour
     public float moveSpeed;
     public Vector2 moveDirection;
     public float rageValue = 10f;
+    [Header("try to set to value from 0-25; the higher the squeakier i think")]
+    public int pitch = 10;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -69,7 +71,7 @@ public class NPC : MonoBehaviour
 
     public virtual IEnumerator ShowTextbox() {
         PlayerManager.Instance.controller.StopPlayer();
-        RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", Random.Range(0, 25));
+        RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", pitch);
         var obj = Instantiate(textBoxObject, transform.position, Quaternion.identity, transform);
         PlayerManager.Instance.cameraPosition.position = PlayerManager.Instance.cameraPosition.position + 0.5f*(transform.position - PlayerManager.Instance.transform.position);
         obj.transform.localPosition = new Vector3(1.5f, 1.5f, 0);
