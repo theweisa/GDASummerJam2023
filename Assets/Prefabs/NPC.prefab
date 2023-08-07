@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 298730326239308634, guid: f0bfba9a78f3dff45b473cfff21690bf, type: 3}
       propertyPath: m_Name
-      value: NPCChar
+      value: NPC
       objectReference: {fileID: 0}
     - target: {fileID: 5527590728856017819, guid: f0bfba9a78f3dff45b473cfff21690bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -93,3 +93,4 @@ MonoBehaviour:
   textBox: {fileID: 0}
   script:
   - lmao
+  textSpeed: 0.1
