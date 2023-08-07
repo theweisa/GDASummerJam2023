@@ -142,7 +142,7 @@ public class GameManager : UnitySingleton<GameManager>
         gameState = GameState.PostRage;
         PlayerManager.Instance.controller.StopPlayer();
         rageMusic.setParameterByName("Music_End", 1);
-        StartCoroutine(StartCinematicEdges(2f, LeanTweenType.easeOutQuart, 1.4f));
+        StartCoroutine(StartCinematicEdges());//2f, LeanTweenType.easeOutQuart, 1.4f
         yield return new WaitForSeconds(2f);
         rageMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         yield return QueueNumber.Instance.AnimatePopIn();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class EnvironmentObject : MonoBehaviour
 {
@@ -26,14 +27,16 @@ public class EnvironmentObject : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll) {
         if (coll.gameObject.tag != "Punch") return;
         if (rb == null) return;
-        Debug.Log("hit env");
+        RuntimeManager.PlayOneShot(FMODEventReferences.instance.ChairHit);
+        CameraManager.Instance.StartShake(20f, 0.4f, 800f);
         Vector2 dir = ((Vector2)Global.GetMouseWorldPosition() - (Vector2)PlayerManager.Instance.transform.position).normalized;
         rb.AddForce(dir * 40, ForceMode2D.Impulse);
     }
     void OnTriggerEnter2D(Collider2D coll) {
         if (coll.gameObject.tag != "Punch") return;
         if (rb == null) return;
-        Debug.Log("hit env");
+        RuntimeManager.PlayOneShot(FMODEventReferences.instance.ChairHit);
+        CameraManager.Instance.StartShake(20f, 0.4f, 800f);
         Vector2 dir = ((Vector2)Global.GetMouseWorldPosition() - (Vector2)PlayerManager.Instance.transform.position).normalized;
         rb.AddForce(dir * 10f, ForceMode2D.Impulse);
     }
