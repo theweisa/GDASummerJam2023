@@ -10,6 +10,7 @@ public class FMODEventReferences : MonoBehaviour
     [field: SerializeField] public EventReference RageModeMusic {get; private set;}
 
     [field: Header("UI SFX")]
+    [field: SerializeField] public EventReference MouseClick {get; private set;}
 
     [field: Header("Player SFX")] 
     [field: SerializeField] public EventReference Walking {get; private set;}
