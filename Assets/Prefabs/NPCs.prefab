@@ -55,6 +55,11 @@ MonoBehaviour:
   textBox: {fileID: 0}
   script: []
   textSpeed: 0
+  rb: {fileID: 0}
+  Alive: 0
+  Panic: 0
+  moveSpeed: 0
+  moveDirection: {x: 0, y: 0}
 --- !u!114 &2651928244780452653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +76,11 @@ MonoBehaviour:
   textBox: {fileID: 0}
   script: []
   textSpeed: 0
+  rb: {fileID: 0}
+  Alive: 0
+  Panic: 0
+  moveSpeed: 0
+  moveDirection: {x: 0, y: 0}
 --- !u!1001 &210113550755876707
 PrefabInstance:
   m_ObjectHideFlags: 0

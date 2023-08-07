@@ -242,17 +242,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca28b4e99ee55ff4591c3073dad2d832, type: 3}
---- !u!114 &230262168 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -8566187661095568472, guid: 0c8090e9a755b964f9cf78235b4084c2, type: 3}
-  m_PrefabInstance: {fileID: 539215857}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f70543a5bb1ef14ab575df32c9a2bfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &468338692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3215138182202416772, guid: ca28b4e99ee55ff4591c3073dad2d832, type: 3}
@@ -320,10 +309,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7780315881249045472, guid: 0c8090e9a755b964f9cf78235b4084c2, type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7780315881249045472, guid: 0c8090e9a755b964f9cf78235b4084c2, type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -528,6 +513,13 @@ MonoBehaviour:
       Data3: 281234068
       Data4: -315844131
     Path: event:/Music_Rage
+  <MouseClick>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   <Walking>k__BackingField:
     Guid:
       Data1: -655943939
@@ -1172,10 +1164,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3503433366672139463, guid: 98e2be4521c8bcf41b9c19c893055b44, type: 3}
-      propertyPath: controller
-      value: 
-      objectReference: {fileID: 230262168}
     - target: {fileID: 8370350175479210517, guid: 98e2be4521c8bcf41b9c19c893055b44, type: 3}
       propertyPath: m_Name
       value: Game Manager
@@ -1193,10 +1181,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 194075903567969060, guid: 250c1fd5359f4ad4199c6744fda142a8, type: 3}
-      propertyPath: orthographic size
-      value: 11.81
-      objectReference: {fileID: 0}
     - target: {fileID: 2584651734008547786, guid: 250c1fd5359f4ad4199c6744fda142a8, type: 3}
       propertyPath: m_Follow
       value: 
@@ -1249,8 +1233,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5915361946940402139, guid: 250c1fd5359f4ad4199c6744fda142a8, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
