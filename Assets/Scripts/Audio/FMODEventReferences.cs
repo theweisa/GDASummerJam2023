@@ -19,6 +19,7 @@ public class FMODEventReferences : MonoBehaviour
     [field: Header ("World SFX")]
     [field: SerializeField] public EventReference Ambience {get; private set;}
     [field: SerializeField] public EventReference TensionRiser {get; private set;}
+    [field: SerializeField] public EventReference ChairHit {get; private set;}
 
     [field: Header ("NPC SFX")]    
     [field: SerializeField] public EventReference DialogueBlip {get; private set;}
