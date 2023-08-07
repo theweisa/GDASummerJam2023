@@ -17,6 +17,7 @@ public class MoveAnimation : MonoBehaviour
     public void Move() {
         if (moving) return;
         walkingSFX = AudioManager.instance.CreateEventInstance(FMODEventReferences.instance.Walking);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(walkingSFX, GetComponent<Transform>(), GetComponent<Rigidbody>());
         walkingSFX.start();
         moving = true;
         Turn();

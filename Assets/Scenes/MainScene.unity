@@ -758,6 +758,13 @@ MonoBehaviour:
       Data3: 943988386
       Data4: 1359840167
     Path: event:/Player_PunchHit
+  <Explosion>k__BackingField:
+    Guid:
+      Data1: 1297954649
+      Data2: 1165394784
+      Data3: -1158473848
+      Data4: 1851985414
+    Path: event:/Player_Explode
   <Ambience>k__BackingField:
     Guid:
       Data1: -910595068
