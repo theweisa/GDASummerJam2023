@@ -16,6 +16,7 @@ public class FMODEventReferences : MonoBehaviour
     [field: SerializeField] public EventReference Walking {get; private set;}
     [field: SerializeField] public EventReference PunchWhiff {get; private set;}
     [field: SerializeField] public EventReference PunchHit {get; private set;}
+    [field: SerializeField] public EventReference Explosion {get; private set;}    
 
     [field: Header ("World SFX")]
     [field: SerializeField] public EventReference Ambience {get; private set;}
