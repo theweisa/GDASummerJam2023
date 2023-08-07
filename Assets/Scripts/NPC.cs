@@ -59,11 +59,11 @@ public class NPC : MonoBehaviour
             if (textBox == null)
             {
                 RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", Random.Range(0, 25));
-                var obj = Instantiate(textBoxObject, transform.position, Quaternion.identity);
+                var obj = Instantiate(textBoxObject, transform.position, Quaternion.identity, transform);
+                PlayerManager.Instance.cameraPosition.position = PlayerManager.Instance.cameraPosition.position + 0.5f*(transform.position - PlayerManager.Instance.transform.position);
+                obj.transform.localPosition = new Vector3(6.53f, 4.27f, 0);
                 textBox = obj.GetComponent<TextBoxHandler>();
                 textBox.NPC = this;
-                textBox.transform.SetParent(transform);
-                textBox.transform.Translate(0f, 4f, 0f);
                 textBox.Activate();
             }
             else if(textBox.isActiveAndEnabled == false)

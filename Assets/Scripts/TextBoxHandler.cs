@@ -36,6 +36,7 @@ public class TextBoxHandler : MonoBehaviour
 
     public void Deactivate()
     {
+        PlayerManager.Instance.cameraPosition.localPosition = Vector2.zero;
         PlayerManager.Instance.controller.canMove = true;
         textBox.SetActive(false);
         currentLine = 0;

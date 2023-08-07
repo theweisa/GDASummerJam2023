@@ -5,4 +5,5 @@ using UnityEngine;
 public class PlayerManager : UnitySingleton<PlayerManager>
 {
     public PlayerController controller;
+    public Transform cameraPosition;
 }

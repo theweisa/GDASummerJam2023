@@ -24,13 +24,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
-    - target: {fileID: 1036015642509428133, guid: f0bfba9a78f3dff45b473cfff21690bf, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 298730326239308634, guid: f0bfba9a78f3dff45b473cfff21690bf, type: 3}
       propertyPath: m_TagString
       value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 1036015642509428133, guid: f0bfba9a78f3dff45b473cfff21690bf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2649365472587927708, guid: f0bfba9a78f3dff45b473cfff21690bf, type: 3}
       propertyPath: m_Material
@@ -108,6 +108,12 @@ MonoBehaviour:
   textBox: {fileID: 0}
   script:
   - lmao
+  textSpeed: 0
+  rb: {fileID: 0}
+  Alive: 0
+  Panic: 0
+  moveSpeed: 0
+  moveDirection: {x: 0, y: 0}
 --- !u!114 &3204713622977943294
 MonoBehaviour:
   m_ObjectHideFlags: 0
