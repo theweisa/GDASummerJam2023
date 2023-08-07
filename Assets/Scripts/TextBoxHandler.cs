@@ -10,6 +10,7 @@ public class TextBoxHandler : MonoBehaviour
     public TMP_Text text;
     public NPC NPC;
     public int currentLine = 0;
+    public bool hasActivated = false;
 
     public bool canContinue = true;
     void Start()
@@ -37,6 +38,11 @@ public class TextBoxHandler : MonoBehaviour
         PlayerManager.Instance.controller.canMove = true;
         textBox.SetActive(false);
         currentLine = 0;
+        if(!hasActivated)
+        {
+            RageLogic.Instance.AddRage(2.5f);
+        }
+        hasActivated = true;
     }
 
     private IEnumerator DisplayLine(string line)
