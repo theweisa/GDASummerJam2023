@@ -9,9 +9,47 @@ public class NPC : MonoBehaviour
     public TextBoxHandler textBox;
     public List<string> script = new List<string>();
     public float textSpeed;
+    public Rigidbody2D rb;
+    public bool Alive;
+    public bool Panic;
+    public float moveSpeed;
+    public Vector2 moveDirection;
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!Panic){
+            Debug.Log("Panic?" + Panic);
+            GameObject[] gos;
+            gos = GameObject.FindGameObjectsWithTag("NPC");
+
+            foreach(GameObject go in gos){
+                go.SendMessage("StartPanic");
+            }
+        }
+        if (collision.gameObject.tag == "Punch"){
+            Debug.Log(collision.gameObject.tag);
+            if (Alive){
+                Alive = false;
+                rb.drag = 1;
+                GameObject[] gos;
+                gos = GameObject.FindGameObjectsWithTag("NPC");
+                bool check = false;
+                foreach(GameObject go in gos){
+                    check = check || Global.FindComponent<NPC>(go).Alive;
+                    print(Global.FindComponent<NPC>(go).Alive + " " + check);
+                }
+                if (!check){
+                    Debug.Log("Game Over");
+                }
+            }
+            rb.AddForce(collision.gameObject.transform.parent.GetComponent<Rigidbody2D>().velocity.normalized * 700);
+        }
+    }
     void Start()
     {
-        
+        Alive = true;
+        Panic = false;
+        rb = rb != null ? rb : Global.FindComponent<Rigidbody2D>(gameObject);
     }
 
     public void OnMouseOver()
@@ -38,6 +76,21 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    void FixedUpdate()
+    {
+
+    }
+
+    void StartPanic()
+    {
+        Panic = true;
+        moveSpeed = 500;
+        moveDirection = Random.insideUnitCircle.normalized;
+        Debug.Log("Panicking" + Panic);
+        rb.drag = 0;
+        rb.AddForce(moveDirection * moveSpeed);
     }
 }
