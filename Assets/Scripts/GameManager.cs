@@ -21,11 +21,11 @@ public class GameManager : UnitySingleton<GameManager>
     void Update()
     {
         if (RageLogic.Instance.rageMeter.value >= 100f && gameState == GameState.Wait) {
-            StartCoroutine(EnterRagePhase());
+            StartCoroutine(FeelingRagePhase());
         } 
     }
 
-    public IEnumerator EnterRagePhase() {
+    public IEnumerator FeelingRagePhase() {
         gameState = GameState.FeelingRage;
         StartCoroutine(StartCinematicEdges(5f, LeanTweenType.linear));
         QueueNumber.Instance.StopQueue();
@@ -59,6 +59,22 @@ public class GameManager : UnitySingleton<GameManager>
         yield return QueueNumber.Instance.AnimateFadeOut();
         yield return EndCinematicEdges(0.2f);
         PlayerManager.Instance.controller.ResumePlayer();
+    }
+
+    public IEnumerator EnterRagePhase() {
+        yield return null;
+        gameState = GameState.Rage;
+    }
+
+    public IEnumerator StartPanic() {
+        gameState = GameState.Rage;
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("NPC");
+
+        foreach(GameObject go in gos){
+            go.SendMessage("StartPanic");
+        }
+        yield return true;
     }
 
     public IEnumerator StartCinematicEdges(float dur=2f, LeanTweenType ease=LeanTweenType.easeOutQuart, float endScale=2f) {

@@ -15,9 +15,19 @@ public class DeskWorker : NPC
         script = initialScript;
     }
 
-    void Update()
+    public override void OnMouseOver()
     {
-
+        if (GameManager.Instance.gameState != GameState.Start && GameManager.Instance.gameState != GameState.FeelingRage && GameManager.Instance.gameState != GameState.Wait) return;
+        if (Input.GetMouseButtonDown(0) 
+            && PlayerManager.Instance.controller.canInteract
+            && script.Count != 0)
+        {
+            if (textBox == null)
+            {
+                StartCoroutine(ShowTextbox());
+                //textBox.Activate();
+            }
+        }
     }
 
     public override IEnumerator ShowTextbox() {
@@ -58,7 +68,7 @@ public class DeskWorker : NPC
                 break;
             }
             case GameState.FeelingRage: {
-                // do some shit
+                StartCoroutine(GameManager.Instance.EnterRagePhase());
                 break;
             }
             default:

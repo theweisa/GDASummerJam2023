@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using Unity.VisualScripting;
 
 public class NPC : MonoBehaviour
 {
     public GameObject textBoxObject;
+    public BaseCharacterController controller;
     public TextBoxHandler textBox;
     public List<string> script = new List<string>();
     public float textSpeed;
@@ -23,44 +25,59 @@ public class NPC : MonoBehaviour
     {
         if (collision.gameObject.tag != "Punch") return;
         if (!Panic){
-            Debug.Log("Panic?" + Panic);
-            GameObject[] gos;
-            gos = GameObject.FindGameObjectsWithTag("NPC");
+            StartCoroutine(GameManager.Instance.StartPanic());
+        }
+        StartCoroutine(OnHit());
+    }
 
-            foreach(GameObject go in gos){
-                go.SendMessage("StartPanic");
-            }
+    void FixedUpdate() {
+        Vector3 dir = rb.velocity.normalized;
+        dir.z = 0f;
+        controller.moveDirection = dir;
+    }
+
+    public IEnumerator OnHit() {
+        Debug.Log("hit!");
+        controller.canMove = false;
+        controller.moveAnim.Stop();
+        rb.drag = 3;
+        if (Alive){
+            Alive = false;            
         }
-        if (collision.gameObject.tag == "Punch"){
-            Debug.Log(collision.gameObject.tag);
-            if (Alive){
-                Alive = false;
-                rb.drag = 1;
-                GameObject[] gos;
-                gos = GameObject.FindGameObjectsWithTag("NPC");
-                bool check = false;
-                foreach(GameObject go in gos){
-                    check = check || Global.FindComponent<NPC>(go).Alive;
-                    print(Global.FindComponent<NPC>(go).Alive + " " + check);
-                }
-                if (!check){
-                    Debug.Log("Game Over");
-                }
-            }
-            rb.AddForce(collision.gameObject.transform.parent.GetComponent<Rigidbody2D>().velocity.normalized * 700);
+        if (!CheckAlive()){
+            Debug.Log("Game Over");
         }
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(0.1f);
+        Time.timeScale = 1f;
+        CameraManager.Instance.StartShake(1f, 1f, 2f);
+        Vector2 dir = ((Vector2)Global.GetMouseWorldPosition() - (Vector2)PlayerManager.Instance.transform.position).normalized;
+
+        rb.AddForce(dir * 40, ForceMode2D.Impulse);
+        yield return null;
+    }
+    public bool CheckAlive() {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("NPC");
+        bool check=false;
+        foreach(GameObject go in gos){
+            check = check || Global.FindComponent<NPC>(go).Alive;
+            print(Global.FindComponent<NPC>(go).Alive + " " + check);
+        }
+        return check;
     }
     public virtual void Start()
     {
         Alive = true;
         Panic = false;
         rb = rb != null ? rb : Global.FindComponent<Rigidbody2D>(gameObject);
+        controller = Global.FindComponent<BaseCharacterController>(gameObject);
     }
 
-    public void OnMouseOver()
+    public virtual void OnMouseOver()
     {
+        if (GameManager.Instance.gameState != GameState.Wait) return;
         if (Input.GetMouseButtonDown(0) 
-            && !RageLogic.Instance.fullRage 
             && PlayerManager.Instance.controller.canInteract
             && script.Count != 0)
         {
@@ -96,24 +113,15 @@ public class NPC : MonoBehaviour
         yield return null;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void FixedUpdate()
-    {
-
-    }
-
     void StartPanic()
     {
         Panic = true;
-        moveSpeed = 500;
+        controller.moveAnim.rotateTimer += Random.Range(-0.1f, 0.1f);
+        moveSpeed = 0;
         moveDirection = Random.insideUnitCircle.normalized;
         Debug.Log("Panicking" + Panic);
         rb.drag = 0;
-        rb.AddForce(moveDirection * moveSpeed);
+        float runForce = 10f + Random.Range(-3f, 3f);
+        rb.AddForce(moveDirection * runForce, ForceMode2D.Impulse);
     }
 }
