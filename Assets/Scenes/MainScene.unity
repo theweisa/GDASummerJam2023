@@ -804,6 +804,20 @@ MonoBehaviour:
       Data3: 430001551
       Data4: 734912614
     Path: event:/Chair_Hit
+  <Panic>k__BackingField:
+    Guid:
+      Data1: -1850814670
+      Data2: 1136048555
+      Data3: -187487864
+      Data4: -342539355
+    Path: event:/World_Panic
+  <Rumble>k__BackingField:
+    Guid:
+      Data1: 1528777954
+      Data2: 1163121455
+      Data3: 1143449774
+      Data4: -2145675104
+    Path: event:/World_Rumble
   <DialogueBlip>k__BackingField:
     Guid:
       Data1: 1753522702
@@ -1181,7 +1195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8662459174080162625, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 35.399994
+      value: 35.400024
       objectReference: {fileID: 0}
     - target: {fileID: 8662459174080162625, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1408,6 +1422,22 @@ PrefabInstance:
     - target: {fileID: 431178611972266906, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: textSpeed
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: initialScript.Array.data[0]
+      value: asdf
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: initialScript.Array.data[1]
+      value: asdf
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: initialScript.Array.data[2]
+      value: asdf
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: initialScript.Array.data[3]
+      value: asdf
       objectReference: {fileID: 0}
     - target: {fileID: 2190507380687996682, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: pitch
