@@ -115,13 +115,16 @@ MonoBehaviour:
   textBoxObject: {fileID: 7046161597819874741, guid: f6c4ddfab1e66064abbc51ba7c92ffa7, type: 3}
   textBox: {fileID: 0}
   script:
-  - lmao
+  - 
   textSpeed: 0
   rb: {fileID: 0}
+  talkedTo: 0
   Alive: 0
   Panic: 0
   moveSpeed: 0
   moveDirection: {x: 0, y: 0}
+  rageValue: 10
+  pitch: 10
 --- !u!114 &3204713622977943294
 MonoBehaviour:
   m_ObjectHideFlags: 0

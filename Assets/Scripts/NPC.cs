@@ -59,7 +59,10 @@ public class NPC : MonoBehaviour
 
     public void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0) && !RageLogic.Instance.fullRage && PlayerManager.Instance.controller.canInteract)
+        if (Input.GetMouseButtonDown(0) 
+            && !RageLogic.Instance.fullRage 
+            && PlayerManager.Instance.controller.canInteract
+            && script.Count != 0)
         {
             if (textBox == null)
             {
