@@ -54,7 +54,7 @@ public class NPC : MonoBehaviour
 
     public void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !RageLogic.Instance.fullRage)
         {
             if (textBox == null)
             {

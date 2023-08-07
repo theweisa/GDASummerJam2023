@@ -20,7 +20,7 @@ public class QueueNumber : MonoBehaviour
 
     private IEnumerator queueNumTimer(){
         //Replace this later with environment variable to stop iteration
-        while(true){
+        while(!RageLogic.Instance.fullRage){
             switch(SelectPosition())
             {
                 case 1:
