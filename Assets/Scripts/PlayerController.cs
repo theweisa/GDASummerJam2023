@@ -8,10 +8,14 @@ public class PlayerController : BaseCharacterController
     [Header("Player References")]
     [Space(4)]
     public Collider2D punchHitbox;
-
+    public bool rage;
     protected override void Awake() {
         base.Awake();
-        if (punchHitbox) punchHitbox.enabled = false;
+        if (punchHitbox){
+            punchHitbox.enabled = false;
+            punchHitbox.GetComponent<Renderer>().enabled = false;
+        }
+        rage = false;
     }
 
     void OnMove(InputValue value) {
@@ -29,22 +33,37 @@ public class PlayerController : BaseCharacterController
         accessory.flipX = sprite.flipX;
     }
 
+    void Update()
+    {
+        Vector3 positionMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 towardsMouseFromPlayer = positionMouse - transform.position;
+        towardsMouseFromPlayer.z = 0;
+        towardsMouseFromPlayer = towardsMouseFromPlayer.normalized;
+        punchHitbox.transform.position = Vector3.MoveTowards(punchHitbox.transform.position, transform.position + towardsMouseFromPlayer * 4, 16);
+    }
+
     void OnFire(InputValue value){
-        StartCoroutine(punch());
+        if (rage){
+            StartCoroutine(punch());
+        }
     }
 
     IEnumerator punch(){
         FMODUnity.RuntimeManager.PlayOneShot(FMODEventReferences.instance.PunchWhiff);
         Vector3 positionMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 towardsMouseFromPlayer = positionMouse - transform.position;
+        towardsMouseFromPlayer.z = 0;
         towardsMouseFromPlayer = towardsMouseFromPlayer.normalized;
-        punchHitbox.transform.position = transform.position;
-        punchHitbox.transform.position = Vector3.MoveTowards(punchHitbox.transform.position, punchHitbox.transform.position + towardsMouseFromPlayer * 6, 16);
         rb.AddForce(50f*towardsMouseFromPlayer, ForceMode2D.Impulse);
         //transform.position = Vector3.MoveTowards(transform.position, transform.position + towardsMouseFromPlayer * 2, 16);
         punchHitbox.enabled = true;
         Debug.Log("Punching");
         yield return new WaitForSeconds(.5f);
         punchHitbox.enabled = false;
+    }
+
+    void makeRage(){
+        rage = true;
+        punchHitbox.GetComponent<Renderer>().enabled = true;
     }
 }
