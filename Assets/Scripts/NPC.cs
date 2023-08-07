@@ -17,6 +17,7 @@ public class NPC : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag != "Punch") return;
         if (!Panic){
             Debug.Log("Panic?" + Panic);
             GameObject[] gos;
@@ -45,7 +46,7 @@ public class NPC : MonoBehaviour
             rb.AddForce(collision.gameObject.transform.parent.GetComponent<Rigidbody2D>().velocity.normalized * 700);
         }
     }
-    void Start()
+    public virtual void Start()
     {
         Alive = true;
         Panic = false;

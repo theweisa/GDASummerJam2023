@@ -5,25 +5,14 @@ using FMODUnity;
 
 public class DeskWorker : NPC
 {
-    public void OnMouseOver()
+    public List<string> initialScript = new List<string>();
+    public List<string> waitScript = new List<string>();
+    public List<string> rageScript = new List<string>();
+
+    public override void Start()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (textBox == null)
-            {
-                RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", Random.Range(0, 25));
-                var obj = Instantiate(textBoxObject, transform.position, Quaternion.identity);
-                textBox = obj.GetComponent<TextBoxHandler>();
-                textBox.NPC = this;
-                textBox.transform.SetParent(transform);
-                textBox.transform.Translate(0f, 4f, 0f);
-                textBox.Activate();
-            }
-            else if(textBox.isActiveAndEnabled == false)
-            {
-                textBox.Activate();
-            }
-        }
+        base.Start();
+        script = initialScript;
     }
 
     void Update()

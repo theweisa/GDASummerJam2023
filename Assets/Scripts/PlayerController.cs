@@ -41,7 +41,7 @@ public class PlayerController : BaseCharacterController
         Vector3 towardsMouseFromPlayer = positionMouse - transform.position;
         towardsMouseFromPlayer.z = 0;
         towardsMouseFromPlayer = towardsMouseFromPlayer.normalized;
-        punchHitbox.transform.position = Vector3.MoveTowards(punchHitbox.transform.position, transform.position + towardsMouseFromPlayer * 4, 16);
+        punchHitbox.transform.position = Vector3.MoveTowards(punchHitbox.transform.position, transform.position + towardsMouseFromPlayer * 2, 16);
     }
 
     void OnFire(InputValue value){

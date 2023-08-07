@@ -187,7 +187,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6537129520760458630, guid: 445e4bff6740e334c9ba47e30ab1c681, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 445e4bff6740e334c9ba47e30ab1c681, type: 3}
@@ -242,6 +243,22 @@ PrefabInstance:
     - target: {fileID: 2804238207054397160, guid: 0c8090e9a755b964f9cf78235b4084c2, type: 3}
       propertyPath: m_TagString
       value: Punch
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821856173991248443, guid: 0c8090e9a755b964f9cf78235b4084c2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821856173991248443, guid: 0c8090e9a755b964f9cf78235b4084c2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821856173991248443, guid: 0c8090e9a755b964f9cf78235b4084c2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821856173991248443, guid: 0c8090e9a755b964f9cf78235b4084c2, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7042744747735733535, guid: 0c8090e9a755b964f9cf78235b4084c2, type: 3}
       propertyPath: m_Sprite
@@ -794,6 +811,48 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: textBoxObject
+      value: 
+      objectReference: {fileID: 7046161597819874741, guid: f6c4ddfab1e66064abbc51ba7c92ffa7, type: 3}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: rageScript.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: waitScript.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: initialScript.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: rageScript.Array.data[0]
+      value: Hi! Fuck you ass hole.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: waitScript.Array.data[0]
+      value: Please sit down and wait for your number to be called.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: initialScript.Array.data[0]
+      value: Hello! Welcome to the DMC!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: initialScript.Array.data[1]
+      value: Unfortunately you will need to join our SHORT queue of people who need
+        service.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: initialScript.Array.data[2]
+      value: Your number is.... <TBD>!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: initialScript.Array.data[3]
+      value: We'll be ready to serve you when your number is called. Feel free to
+        mingle while waiting.
+      objectReference: {fileID: 0}
     - target: {fileID: 2625114473949302385, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: script.Array.data[1]
       value: What's next, requiring a license to make toast in your own damn toaster?
@@ -801,6 +860,18 @@ PrefabInstance:
     - target: {fileID: 3169453652428920210, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: m_Name
       value: NPCs
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502170147033971231, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_SortingOrder
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6134820595570946796, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743651625655970794, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7943643904511288809, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -842,7 +913,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8557990269989175834, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8557990269989175834, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -23.1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2215231404218979025, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
