@@ -19,12 +19,13 @@ public class GameManager : UnitySingleton<GameManager>
     public TMP_Text tutorialText;
     public GameObject explosion;
     public RectTransform gameOver;
+    [HideInInspector] public bool followDeskWorker=false;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(StartGame());
-        //StartCoroutine(PostRage());
+        //StartCoroutine(StartGame());
+        StartCoroutine(PostRage());
         //PlayerManager.Instance.controller.StopPlayer();
         //StartCoroutine(FeelingRagePhase());
     }
@@ -118,6 +119,9 @@ public class GameManager : UnitySingleton<GameManager>
         PlayerManager.Instance.controller.StopPlayer();
         PlayerManager.Instance.controller.rage = false;
         StartCoroutine(StartCinematicEdges());
+        followDeskWorker = true;
+        yield return new WaitForSeconds(2.5f);
+        followDeskWorker = false;
         PlayerManager.Instance.cameraPosition.transform.position = Vector3.zero;
         yield return new WaitForSeconds(3.5f);
         RuntimeManager.PlayOneShot(FMODEventReferences.instance.Panic);
@@ -145,12 +149,26 @@ public class GameManager : UnitySingleton<GameManager>
         StartCoroutine(StartCinematicEdges());//2f, LeanTweenType.easeOutQuart, 1.4f
         yield return new WaitForSeconds(2f);
         rageMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+        yield return QueueNumber.Instance.AnimatePopIn();
+        QueueNumber.Instance.SetRectPos(new Vector2(0.5f, 1f));
+        QueueNumber.Instance.text.text = "fucking dumbass1";
+        yield return new WaitForSeconds(3f);
+        yield return QueueNumber.Instance.AnimateFadeOut();
+        yield return new WaitForSeconds(1f);    
+
         yield return QueueNumber.Instance.AnimatePopIn();
         QueueNumber.Instance.SetRectPos(new Vector2(0.5f, 0f));
-        QueueNumber.Instance.text.text = "fucking dumbass";
+        QueueNumber.Instance.text.text = "fucking dumbass2";
         yield return new WaitForSeconds(2f);
         yield return QueueNumber.Instance.AnimateFadeOut();
         yield return new WaitForSeconds(2f);
+
+        LeanTween.value(PlayerManager.Instance.gameObject, (float val)=>{
+            PlayerManager.Instance.controller.SetRed(val);
+        }, 0f, 100f, 2.4f);
+        yield return new WaitForSeconds(2.4f);
+
         var explode = Instantiate(explosion, PlayerManager.Instance.transform.position, Quaternion.identity);
         CameraManager.Instance.StartShake(50f, 0.7f, 20f);
         PlayerManager.Instance.gameObject.SetActive(false);

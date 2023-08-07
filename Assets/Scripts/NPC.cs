@@ -49,9 +49,13 @@ public class NPC : MonoBehaviour
 
     public virtual IEnumerator OnHit() {
         Debug.Log("hit!");
+        controller.moveAnim.Stop();
         FMODUnity.RuntimeManager.PlayOneShot(FMODEventReferences.instance.PunchHit);        
         controller.canMove = false;
-        controller.moveAnim.Stop();
+        
+        anim.SetBool("dead", true);
+        Vector2 dir = ((Vector2)Global.GetMouseWorldPosition() - (Vector2)PlayerManager.Instance.transform.position).normalized;
+        rb.AddForce(dir * 40, ForceMode2D.Impulse);
         rb.drag = 3;
         if (Alive){
             Alive = false;   
@@ -63,11 +67,7 @@ public class NPC : MonoBehaviour
         else {
             CameraManager.Instance.StartShake(30f, 0.4f, 100f);
         }
-        anim.SetBool("dead", true);
         
-        Vector2 dir = ((Vector2)Global.GetMouseWorldPosition() - (Vector2)PlayerManager.Instance.transform.position).normalized;
-
-        rb.AddForce(dir * 40, ForceMode2D.Impulse);
 
         if (!CheckAlive()){
             Debug.Log("Game Over");
