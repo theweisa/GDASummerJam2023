@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnvironmentObject : MonoBehaviour
 {
     public SpriteRenderer sprite;
+    public int sortLayerFactor = 2;
     void Awake() {
         sprite = sprite != null ? sprite : Global.FindComponent<SpriteRenderer>(gameObject);
     }
@@ -17,6 +18,6 @@ public class EnvironmentObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sprite.sortingOrder = transform.position.y < PlayerManager.Instance.controller.transform.position.y ? PlayerManager.Instance.controller.sprite.sortingOrder+1 : PlayerManager.Instance.controller.sprite.sortingOrder-1;
+        sprite.sortingOrder = transform.position.y < PlayerManager.Instance.controller.transform.position.y ? PlayerManager.Instance.controller.sprite.sortingOrder+sortLayerFactor : PlayerManager.Instance.controller.sprite.sortingOrder-sortLayerFactor;
     }
 }

@@ -13,20 +13,29 @@ public class TextBoxHandler : MonoBehaviour
     public NPC NPC;
     public int currentLine = 0;
     public bool hasActivated = false;
+    public bool finished = false;
 
     public bool canContinue = true;
-    void Start()
-    {
+    private Vector3 initScale;
 
+    void Awake() {
+        initScale = transform.localScale;
     }
-
-    public void Activate()
+    /*void Start()
     {
-        PlayerManager.Instance.controller.canMove = false;
-        PlayerManager.Instance.controller.moveAnim.Stop();
+        initScale = transform.localScale;
+    }*/
+
+    public IEnumerator Activate()
+    {
+        finished = false;
         canContinue = false;
-        textBox.SetActive(true);
+        transform.localScale = Vector3.zero;
+        LeanTween.scale(gameObject, initScale, 0.5f).setEaseOutQuart();
+        //yield return new WaitForSeconds(0.5f);
         StartCoroutine(DisplayLine(NPC.script[currentLine]));
+        yield return new WaitUntil(()=>finished);
+        Destroy(gameObject);
     }
 
     public void Continue()
@@ -35,11 +44,11 @@ public class TextBoxHandler : MonoBehaviour
         StartCoroutine(DisplayLine(NPC.script[currentLine]));
     }
 
-    public void Deactivate()
+    public IEnumerator Deactivate()
     {
-        PlayerManager.Instance.cameraPosition.localPosition = Vector2.zero;
-        PlayerManager.Instance.controller.canMove = true;
-        textBox.SetActive(false);
+        LeanTween.scale(gameObject, Vector3.zero, 0.5f).setEaseOutQuart();
+        yield return new WaitForSeconds(0.5f);
+        finished = true;
         currentLine = 0;
         if(!hasActivated)
         {
@@ -66,7 +75,7 @@ public class TextBoxHandler : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && canContinue && gameObject.activeSelf)
         {
             if(currentLine >= NPC.script.Count){
-                Deactivate();
+                StartCoroutine(Deactivate());
             }
             else
             {

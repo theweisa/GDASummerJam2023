@@ -8,6 +8,9 @@ public class PlayerController : BaseCharacterController
     [Header("Player References")]
     [Space(4)]
     public Collider2D punchHitbox;
+    private bool rageState = false;
+    public bool canPunch = false;
+    public bool canInteract = true;
 
     protected override void Awake() {
         base.Awake();
@@ -30,6 +33,7 @@ public class PlayerController : BaseCharacterController
     }
 
     void OnFire(InputValue value){
+        if (!canPunch) return;
         StartCoroutine(punch());
     }
 
@@ -46,5 +50,18 @@ public class PlayerController : BaseCharacterController
         Debug.Log("Punching");
         yield return new WaitForSeconds(.5f);
         punchHitbox.enabled = false;
+    }
+
+    public void StopPlayer() {
+        moveAnim.Stop();
+        canMove = false;
+        canInteract = false;
+        canPunch = false;
+    }
+    public void ResumePlayer() {
+        canMove = true;
+        canInteract = true;
+        if (rageState)
+            canPunch = true;
     }
 }

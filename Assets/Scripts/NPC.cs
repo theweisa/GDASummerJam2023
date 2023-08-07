@@ -54,23 +54,28 @@ public class NPC : MonoBehaviour
 
     public void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0) && !RageLogic.Instance.fullRage)
+        if (Input.GetMouseButtonDown(0) && !RageLogic.Instance.fullRage && PlayerManager.Instance.controller.canInteract)
         {
             if (textBox == null)
             {
-                RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", Random.Range(0, 25));
-                var obj = Instantiate(textBoxObject, transform.position, Quaternion.identity, transform);
-                PlayerManager.Instance.cameraPosition.position = PlayerManager.Instance.cameraPosition.position + 0.5f*(transform.position - PlayerManager.Instance.transform.position);
-                obj.transform.localPosition = new Vector3(6.53f, 4.27f, 0);
-                textBox = obj.GetComponent<TextBoxHandler>();
-                textBox.NPC = this;
-                textBox.Activate();
-            }
-            else if(textBox.isActiveAndEnabled == false)
-            {
-                textBox.Activate();
+                StartCoroutine(ShowTextbox());
+                //textBox.Activate();
             }
         }
+    }
+
+    IEnumerator ShowTextbox() {
+        PlayerManager.Instance.controller.StopPlayer();
+        RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", Random.Range(0, 25));
+        var obj = Instantiate(textBoxObject, transform.position, Quaternion.identity, transform);
+        PlayerManager.Instance.cameraPosition.position = PlayerManager.Instance.cameraPosition.position + 0.5f*(transform.position - PlayerManager.Instance.transform.position);
+        obj.transform.localPosition = new Vector3(1.5f, 1.5f, 0);
+        textBox = obj.GetComponent<TextBoxHandler>();
+        textBox.NPC = this;
+        yield return textBox.Activate();
+        PlayerManager.Instance.cameraPosition.localPosition = Vector2.zero;
+        PlayerManager.Instance.controller.ResumePlayer();
+        textBox = null;
     }
 
     // Update is called once per frame

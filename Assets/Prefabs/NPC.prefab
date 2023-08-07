@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb77ffcd8e19344695fd4c4bec13340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textBoxObject: {fileID: 1841678641009842863, guid: f6c4ddfab1e66064abbc51ba7c92ffa7, type: 3}
+  textBoxObject: {fileID: 7046161597819874741, guid: f6c4ddfab1e66064abbc51ba7c92ffa7, type: 3}
   textBox: {fileID: 0}
   script:
   - lmao
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 918049135299690032}
+  sortLayerFactor: 1
 --- !u!212 &918049135299690032 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 291343439794217886, guid: f0bfba9a78f3dff45b473cfff21690bf, type: 3}
