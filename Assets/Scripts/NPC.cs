@@ -24,6 +24,7 @@ public class NPC : MonoBehaviour
     public int pitch = 10;
 
     protected float hitstun = 0.21f;
+    Coroutine sporadicMove;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -38,12 +39,12 @@ public class NPC : MonoBehaviour
         Vector3 dir = rb.velocity.normalized;
         dir.z = 0f;
         controller.moveDirection = dir;
-        if (script.Count == 0) {
+        /*if (script.Count == 0) {
             interactPrompt.SetActive(false);
         }
         else {
             interactPrompt.SetActive(true);
-        }
+        }*/
     }
 
     public virtual IEnumerator OnHit() {
@@ -89,6 +90,20 @@ public class NPC : MonoBehaviour
         rb = rb != null ? rb : Global.FindComponent<Rigidbody2D>(gameObject);
         controller = Global.FindComponent<BaseCharacterController>(gameObject);
         anim = Global.FindComponent<Animator>(gameObject);
+        sporadicMove = StartCoroutine(SporadicMovement());
+    }
+
+    public virtual IEnumerator SporadicMovement() {
+        float time = 3f + Random.Range(0f, 3f);
+        while (GameManager.Instance.gameState != GameState.PanicStart) {
+            yield return new WaitForSeconds(time);
+            if (GameManager.Instance.gameState == GameState.PanicStart) continue;
+            time = 3f + Random.Range(0f, 3f);
+            Vector2 dir = Random.insideUnitCircle.normalized;
+            float force = 5f + Random.Range(0f, 3f);
+            rb.AddForce(force*dir, ForceMode2D.Impulse);
+        }
+        FacePlayer();
     }
 
     public virtual void OnMouseOver()
@@ -100,18 +115,24 @@ public class NPC : MonoBehaviour
         {
             if (textBox == null)
             {
-                if (controller.sprite.flipX != (PlayerManager.Instance.transform.position-transform.position).x > 0f) {
-                    controller.sprite.flipX = !controller.sprite.flipX;
-                    controller.accessory.flipX = controller.sprite.flipX;
-                    controller.moveAnim.Flip();
-                }
+                FacePlayer();
                 StartCoroutine(ShowTextbox());
                 //textBox.Activate();
             }
         }
     }
+    public void FacePlayer() {
+        if (controller.sprite.flipX != (PlayerManager.Instance.transform.position-transform.position).x > 0f) {
+            controller.sprite.flipX = !controller.sprite.flipX;
+            controller.accessory.flipX = controller.sprite.flipX;
+            controller.moveAnim.Flip();
+        }
+    }   
 
     public virtual IEnumerator ShowTextbox() {
+        if (sporadicMove != null)
+            StopCoroutine(sporadicMove);
+        controller.rb.velocity = Vector2.zero;
         PlayerManager.Instance.controller.StopPlayer();
         RuntimeManager.StudioSystem.setParameterByName("NPC_Pitch", pitch);
         var obj = Instantiate(textBoxObject, transform.position, Quaternion.identity, transform);
@@ -131,6 +152,9 @@ public class NPC : MonoBehaviour
             RageLogic.Instance.AddRage(rageValue);
         }
         PlayerManager.Instance.controller.ResumePlayer();
+        if (sporadicMove != null)
+            StopCoroutine(sporadicMove);
+        sporadicMove = StartCoroutine(SporadicMovement());
         textBox = null;
         yield return null;
     }

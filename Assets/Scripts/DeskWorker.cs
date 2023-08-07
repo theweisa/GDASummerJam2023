@@ -42,6 +42,10 @@ public class DeskWorker : NPC
         }
     }
 
+    public override IEnumerator SporadicMovement() {
+        yield return null;
+    }
+
     public override IEnumerator ShowTextbox() {
         switch (GameManager.Instance.gameState) {
             case GameState.Start: {

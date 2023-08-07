@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public enum GameState { Start, Wait, FeelingRage, Rage, PostRage };
+public enum GameState { Start, Wait, FeelingRage, PanicStart, Rage, PostRage };
 public class GameManager : UnitySingleton<GameManager>
 {
     public Transform cinematicBars;
@@ -105,7 +105,7 @@ public class GameManager : UnitySingleton<GameManager>
     }
 
     public IEnumerator StartPanic() {
-        gameState = GameState.Rage;
+        gameState = GameState.PanicStart;
         PlayerManager.Instance.controller.StopPlayer();
         PlayerManager.Instance.controller.rage = false;
         StartCoroutine(StartCinematicEdges());
@@ -118,6 +118,7 @@ public class GameManager : UnitySingleton<GameManager>
         foreach(GameObject go in gos){
             go.SendMessage("StartPanic");
         }
+        gameState = GameState.Rage;
         yield return new WaitForSeconds(2f);
         PlayerManager.Instance.cameraPosition.transform.localPosition = Vector3.zero;
         yield return new WaitForSeconds(2f);
