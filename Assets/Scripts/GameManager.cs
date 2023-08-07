@@ -9,23 +9,38 @@ public class GameManager : UnitySingleton<GameManager>
 {
     public Transform cinematicBars;
     public GameState gameState;
+    public RectTransform logo;
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(StartGame());
         //PlayerManager.Instance.controller.StopPlayer();
-        PlayerManager.Instance.controller.canInteract = true;
-        //StartCoroutine(EnterRagePhase());
+        //StartCoroutine(FeelingRagePhase());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (RageLogic.Instance.rageMeter.value >= 100f && gameState == GameState.Wait) {
-            StartCoroutine(EnterRagePhase());
+        if (RageLogic.Instance.rageMeter.value >= 100f && gameState == GameState.Wait && PlayerManager.Instance.controller.canInteract) {
+            StartCoroutine(FeelingRagePhase());
         } 
     }
 
-    public IEnumerator EnterRagePhase() {
+    public IEnumerator StartGame() {
+        PlayerManager.Instance.cameraPosition.transform.position = Vector3.zero;
+        logo.gameObject.SetActive(true);
+        RageLogic.Instance.gameObject.SetActive(false);
+        PlayerManager.Instance.controller.StopPlayer();
+        yield return new WaitUntil(()=>Input.GetMouseButtonDown(0));
+        LeanTween.moveY(logo.gameObject, logo.transform.position.y+100f, 1.5f).setEaseInBack().setOnComplete(()=>logo.gameObject.SetActive(false));
+        LeanTween.value(PlayerManager.Instance.cameraPosition.gameObject, (float val) => {
+            PlayerManager.Instance.cameraPosition.transform.localPosition = new Vector2(0, val);
+        }, PlayerManager.Instance.cameraPosition.transform.localPosition.y, 0, 2.5f).setEaseInOutCirc();
+        yield return new WaitForSeconds(2.5f);
+        PlayerManager.Instance.controller.canInteract = true;
+    }
+
+    public IEnumerator FeelingRagePhase() {
         gameState = GameState.FeelingRage;
         StartCoroutine(StartCinematicEdges(5f, LeanTweenType.linear));
         QueueNumber.Instance.StopQueue();
@@ -41,7 +56,10 @@ public class GameManager : UnitySingleton<GameManager>
         float prevZoom = CameraManager.Instance.playerCamera.m_Lens.OrthographicSize;
         CameraManager.Instance.Zoom(4f, 5f, LeanTweenType.linear);
         yield return new WaitForSeconds(5f);
+
         yield return QueueNumber.Instance.AnimatePopIn();
+        QueueNumber.Instance.SetRectPos(new Vector2(0.5f, 0f));
+        QueueNumber.Instance.text.text = "numberidfk";
 
         StartCoroutine(EndCinematicEdges(0.2f, LeanTweenType.easeOutQuart, 1.13f));
         CameraManager.Instance.Zoom(prevZoom, 0.3f);
@@ -52,13 +70,63 @@ public class GameManager : UnitySingleton<GameManager>
             RageLogic.Instance.rageMeter.value = val;
         }, 100f, 0f, 0.5f).setEaseOutQuart();
         CameraManager.Instance.StopShake(0f);
-        QueueNumber.Instance.SetRectPos(new Vector2(0.5f, 0f));
-        QueueNumber.Instance.text.text = "numberidfk";
         
         yield return new WaitForSeconds(2f);
         yield return QueueNumber.Instance.AnimateFadeOut();
         yield return EndCinematicEdges(0.2f);
         PlayerManager.Instance.controller.ResumePlayer();
+    }
+
+    public IEnumerator EnterRagePhase() {
+        PlayerManager.Instance.controller.StopPlayer();
+        gameState = GameState.Rage;
+        yield return new WaitForSeconds(2f);
+        RageLogic.Instance.rageMeter.value = 100f;
+        LeanTween.value(RageLogic.Instance.fill.gameObject, (float val)=>{RageLogic.Instance.fill.localScale = new Vector2(val,1);}, 0, 5, 1.5f);
+        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(2f);
+
+        // cock shotgun sound idk
+        PlayerManager.Instance.controller.fists.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        PlayerManager.Instance.controller.rage = true;
+        PlayerManager.Instance.controller.canPunch = true;
+        // TODO: tutorial to punch the guy
+    }
+
+    public IEnumerator StartPanic() {
+        gameState = GameState.Rage;
+        PlayerManager.Instance.controller.StopPlayer();
+        PlayerManager.Instance.controller.rage = false;
+        StartCoroutine(StartCinematicEdges());
+        PlayerManager.Instance.cameraPosition.transform.position = Vector3.zero;
+        yield return new WaitForSeconds(3.5f);
+
+        EnvironmentManager.Instance.UnFreezeAllObjects();
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("NPC");
+        foreach(GameObject go in gos){
+            go.SendMessage("StartPanic");
+        }
+        yield return new WaitForSeconds(2f);
+        PlayerManager.Instance.cameraPosition.transform.localPosition = Vector3.zero;
+        yield return new WaitForSeconds(2f);
+        PlayerManager.Instance.controller.rage = true;
+        PlayerManager.Instance.controller.ResumePlayer();
+        yield return EndCinematicEdges();
+    }
+
+    public IEnumerator PostRage() {
+        gameState = GameState.PostRage;
+        PlayerManager.Instance.controller.StopPlayer();
+        StartCoroutine(StartCinematicEdges(2f, LeanTweenType.easeOutQuart, 1.4f));
+        yield return new WaitForSeconds(2f);
+        yield return QueueNumber.Instance.AnimatePopIn();
+        QueueNumber.Instance.SetRectPos(new Vector2(0.5f, 0f));
+        QueueNumber.Instance.text.text = "fucking dumbass";
+        yield return new WaitForSeconds(2f);
+        yield return QueueNumber.Instance.AnimateFadeOut();
+        ///StartCoroutine(EndCinematicEdges());
     }
 
     public IEnumerator StartCinematicEdges(float dur=2f, LeanTweenType ease=LeanTweenType.easeOutQuart, float endScale=2f) {

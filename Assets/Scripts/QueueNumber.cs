@@ -14,16 +14,16 @@ public class QueueNumber : UnitySingleton<QueueNumber>
     public Coroutine queueCountdown;
     public RectTransform boxPos;
     private Vector2 initScale;
+    public float ragePerLine = 5f;
 
     void Start()
     {
-        gameObject.SetActive(false);
         initScale = transform.localScale;
+        transform.localScale = Vector3.zero;
         boxPos = GetComponent<RectTransform>();
     }
 
     public void StartQueue() {
-        gameObject.SetActive(true);
         transform.localScale = new Vector2(0,0);
         queueCountdown = StartCoroutine(queueNumTimer());
     }
@@ -49,7 +49,10 @@ public class QueueNumber : UnitySingleton<QueueNumber>
             text.text = numberQueue[currentNum];
             StartCoroutine(AnimatePopIn());
             currentNum = currentNum+1 < numberQueue.Count ? currentNum+1 : 0;
-            yield return new WaitForSeconds(interval * 0.7f);
+            yield return new WaitForSeconds(interval * 0.2f);
+            RageLogic.Instance.AddRage(ragePerLine);
+            yield return new WaitForSeconds(interval * 0.5f);
+            
             StartCoroutine(AnimateFadeOut());
             yield return new WaitForSeconds(interval * 0.3f);
         }

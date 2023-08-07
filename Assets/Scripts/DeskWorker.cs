@@ -12,12 +12,30 @@ public class DeskWorker : NPC
     public override void Start()
     {
         base.Start();
+        hitstun = 0.4f;
         script = initialScript;
     }
 
-    void Update()
+    public override IEnumerator OnHit()
     {
+        yield return base.OnHit();
+        hitstun = 0.1f;
+        GetComponent<Collider2D>().isTrigger = false;
+    }
 
+    public override void OnMouseOver()
+    {
+        if (GameManager.Instance.gameState != GameState.Start && GameManager.Instance.gameState != GameState.FeelingRage && GameManager.Instance.gameState != GameState.Wait) return;
+        if (Input.GetMouseButtonDown(0) 
+            && PlayerManager.Instance.controller.canInteract
+            && script.Count != 0)
+        {
+            if (textBox == null)
+            {
+                StartCoroutine(ShowTextbox());
+                //textBox.Activate();
+            }
+        }
     }
 
     public override IEnumerator ShowTextbox() {
@@ -52,13 +70,16 @@ public class DeskWorker : NPC
                 PlayerManager.Instance.controller.ResumePlayer();
                 QueueNumber.Instance.StartQueue();
                 GameManager.Instance.gameState = GameState.Wait;
+                RageLogic.Instance.gameObject.SetActive(true);
+                RageLogic.Instance.transform.position = new Vector2(RageLogic.Instance.transform.position.x, RageLogic.Instance.transform.position.y+10f);
+                LeanTween.moveY(RageLogic.Instance.gameObject, RageLogic.Instance.transform.position.y-10f, 1.4f).setEaseOutCirc();
                 break;
             }
             case GameState.Wait: {
                 break;
             }
             case GameState.FeelingRage: {
-                // do some shit
+                StartCoroutine(GameManager.Instance.EnterRagePhase());
                 break;
             }
             default:
