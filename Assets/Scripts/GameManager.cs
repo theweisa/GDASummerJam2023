@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using TMPro;
 
 public enum GameState { Start, Wait, FeelingRage, Rage, PostRage };
 public class GameManager : UnitySingleton<GameManager>
@@ -10,6 +11,7 @@ public class GameManager : UnitySingleton<GameManager>
     public Transform cinematicBars;
     public GameState gameState;
     public RectTransform logo;
+    public TMP_Text tutorialText;
     // Start is called before the first frame update
     void Start()
     {
@@ -91,6 +93,9 @@ public class GameManager : UnitySingleton<GameManager>
         yield return new WaitForSeconds(1.5f);
         PlayerManager.Instance.controller.rage = true;
         PlayerManager.Instance.controller.canPunch = true;
+        PlayerManager.Instance.controller.punchForce = 0f;
+        tutorialText.text = "Click to punch";
+        tutorialText.gameObject.SetActive(true);
         // TODO: tutorial to punch the guy
     }
 

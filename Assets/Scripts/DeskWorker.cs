@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using TMPro;
 
 public class DeskWorker : NPC
 {
@@ -20,7 +21,9 @@ public class DeskWorker : NPC
     {
         yield return base.OnHit();
         hitstun = 0.1f;
+        GameManager.Instance.tutorialText.gameObject.SetActive(false);
         GetComponent<Collider2D>().isTrigger = false;
+        PlayerManager.Instance.controller.punchForce = PlayerManager.Instance.controller.basePunchForce;
     }
 
     public override void OnMouseOver()
@@ -33,6 +36,7 @@ public class DeskWorker : NPC
             if (textBox == null)
             {
                 StartCoroutine(ShowTextbox());
+                GameManager.Instance.tutorialText.gameObject.SetActive(false);
                 //textBox.Activate();
             }
         }
@@ -71,8 +75,9 @@ public class DeskWorker : NPC
                 QueueNumber.Instance.StartQueue();
                 GameManager.Instance.gameState = GameState.Wait;
                 RageLogic.Instance.gameObject.SetActive(true);
-                RageLogic.Instance.transform.position = new Vector2(RageLogic.Instance.transform.position.x, RageLogic.Instance.transform.position.y+10f);
-                LeanTween.moveY(RageLogic.Instance.gameObject, RageLogic.Instance.transform.position.y-10f, 1.4f).setEaseOutCirc();
+                Vector3 prevPos = RageLogic.Instance.transform.localPosition;
+                RageLogic.Instance.transform.localPosition = new Vector2(RageLogic.Instance.transform.localPosition.x, RageLogic.Instance.transform.localPosition.y+75f);
+                LeanTween.moveLocalY(RageLogic.Instance.gameObject, prevPos.y, 1.4f).setEaseOutCirc();
                 break;
             }
             case GameState.Wait: {
