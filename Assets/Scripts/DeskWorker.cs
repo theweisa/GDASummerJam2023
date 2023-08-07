@@ -89,6 +89,7 @@ public class DeskWorker : NPC
                 Vector3 prevPos = RageLogic.Instance.transform.localPosition;
                 RageLogic.Instance.transform.localPosition = new Vector2(RageLogic.Instance.transform.localPosition.x, RageLogic.Instance.transform.localPosition.y+75f);
                 LeanTween.moveLocalY(RageLogic.Instance.gameObject, prevPos.y, 1.4f).setEaseOutCirc();
+                GameManager.Instance.ticketText.text = "Ticket #F7158";
                 break;
             }
             case GameState.Wait: {
@@ -96,6 +97,7 @@ public class DeskWorker : NPC
             }
             case GameState.FeelingRage: {
                 StartCoroutine(GameManager.Instance.EnterRagePhase());
+                GameManager.Instance.ticketText.text = "Ticket #X9999999...";
                 break;
             }
             default:

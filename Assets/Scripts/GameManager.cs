@@ -19,6 +19,7 @@ public class GameManager : UnitySingleton<GameManager>
     public TMP_Text tutorialText;
     public GameObject explosion;
     public RectTransform gameOver;
+    public TMP_Text ticketText;
     [HideInInspector] public bool followDeskWorker=false;
 
     // Start is called before the first frame update
@@ -72,7 +73,7 @@ public class GameManager : UnitySingleton<GameManager>
 
         yield return QueueNumber.Instance.AnimatePopIn();
         QueueNumber.Instance.SetRectPos(new Vector2(0.5f, 0f));
-        QueueNumber.Instance.text.text = "numberidfk";
+        QueueNumber.Instance.text.text = "Now serving: F7158, at the front desk.";
 
         StartCoroutine(EndCinematicEdges(0.2f, LeanTweenType.easeOutQuart, 1.13f));
         CameraManager.Instance.Zoom(prevZoom, 0.3f);
@@ -108,6 +109,7 @@ public class GameManager : UnitySingleton<GameManager>
         PlayerManager.Instance.controller.rage = true;
         PlayerManager.Instance.controller.canPunch = true;
         PlayerManager.Instance.controller.punchForce = 0f;
+        ticketText.text = "ANGER";
         tutorialText.text = "Click to punch";
         tutorialText.gameObject.SetActive(true);
         // TODO: tutorial to punch the guy

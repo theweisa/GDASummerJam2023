@@ -42,6 +42,7 @@ public class NPC : MonoBehaviour
     }
 
     public virtual IEnumerator OnHit() {
+        controller.accessory.gameObject.SetActive(false);
         Debug.Log("hit!");
         controller.moveAnim.Stop();
         FMODUnity.RuntimeManager.PlayOneShot(FMODEventReferences.instance.PunchHit);        
