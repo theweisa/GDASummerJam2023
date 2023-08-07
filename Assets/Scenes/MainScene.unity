@@ -2067,26 +2067,27 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< HEAD
     - target: {fileID: 431178611972266906, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: textSpeed
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: initialScript.Array.data[0]
-      value: asdf
+      value: Hello! Welcome to the DMC!
       objectReference: {fileID: 0}
     - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: initialScript.Array.data[1]
-      value: asdf
+      value: 'Unfortunately, you will need to join our SHORT queue of people who
+        need service. '
       objectReference: {fileID: 0}
     - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: initialScript.Array.data[2]
-      value: asdf
+      value: Your number is.... 7158!
       objectReference: {fileID: 0}
     - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: initialScript.Array.data[3]
-      value: asdf
+      value: We'll be ready to serve you when your number is called. Feel free to
+        mingle while waiting.
       objectReference: {fileID: 0}
     - target: {fileID: 2190507380687996682, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: pitch
@@ -2100,8 +2101,6 @@ PrefabInstance:
       propertyPath: textSpeed
       value: 0.1
       objectReference: {fileID: 0}
-=======
->>>>>>> main
     - target: {fileID: 3169453652428920210, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: m_Name
       value: NPCs

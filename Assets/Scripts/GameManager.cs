@@ -43,6 +43,7 @@ public class GameManager : UnitySingleton<GameManager>
         RageLogic.Instance.gameObject.SetActive(false);
         PlayerManager.Instance.controller.StopPlayer();
         yield return new WaitUntil(()=>Input.GetMouseButtonDown(0));
+        RuntimeManager.PlayOneShot(FMODEventReferences.instance.MouseClick);
         LeanTween.moveY(logo.gameObject, logo.transform.position.y+100f, 1.5f).setEaseInBack().setOnComplete(()=>logo.gameObject.SetActive(false));
         LeanTween.value(PlayerManager.Instance.cameraPosition.gameObject, (float val) => {
             PlayerManager.Instance.cameraPosition.transform.localPosition = new Vector2(0, val);
