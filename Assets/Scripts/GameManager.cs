@@ -13,7 +13,7 @@ public class GameManager : UnitySingleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(StartGame());
+        StartCoroutine(StartGame());
         //PlayerManager.Instance.controller.StopPlayer();
         //StartCoroutine(FeelingRagePhase());
     }
@@ -29,7 +29,7 @@ public class GameManager : UnitySingleton<GameManager>
     public IEnumerator StartGame() {
         PlayerManager.Instance.cameraPosition.transform.position = Vector3.zero;
         logo.gameObject.SetActive(true);
-        RageLogic.Instance.transform.position = new Vector2(RageLogic.Instance.transform.position.x, RageLogic.Instance.transform.position.y+10f);
+        RageLogic.Instance.gameObject.SetActive(false);
         PlayerManager.Instance.controller.StopPlayer();
         yield return new WaitUntil(()=>Input.GetMouseButtonDown(0));
         LeanTween.moveY(logo.gameObject, logo.transform.position.y+100f, 1.5f).setEaseInBack().setOnComplete(()=>logo.gameObject.SetActive(false));

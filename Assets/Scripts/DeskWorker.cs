@@ -70,7 +70,9 @@ public class DeskWorker : NPC
                 PlayerManager.Instance.controller.ResumePlayer();
                 QueueNumber.Instance.StartQueue();
                 GameManager.Instance.gameState = GameState.Wait;
-                LeanTween.moveY(RageLogic.Instance.gameObject, RageLogic.Instance.transform.position.y-10f, 1.4f).setEaseOutElastic();
+                RageLogic.Instance.gameObject.SetActive(true);
+                RageLogic.Instance.transform.position = new Vector2(RageLogic.Instance.transform.position.x, RageLogic.Instance.transform.position.y+10f);
+                LeanTween.moveY(RageLogic.Instance.gameObject, RageLogic.Instance.transform.position.y-10f, 1.4f).setEaseOutCirc();
                 break;
             }
             case GameState.Wait: {

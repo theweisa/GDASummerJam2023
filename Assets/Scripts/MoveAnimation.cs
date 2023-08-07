@@ -33,10 +33,12 @@ public class MoveAnimation : MonoBehaviour
     }
 
     public void Turn(int right=1) {
+        Debug.Log("turn?");
         //LeanTween.value(gameObject, (float val)=>{transform.localScale=new Vector3(initScale.x,val,initScale.z);},transform.localScale.y,initScale.y*0.85f, 0.1f).setLoopPingPong(2).setEaseOutExpo();
         LeanTween.scaleY(gameObject, initScale.y*0.85f, rotateTimer*0.3f).setLoopPingPong(1);
         LeanTween.moveLocalY(gameObject, 0.2f, rotateTimer*0.4f).setLoopPingPong(1);
-        LeanTween.rotateLocal(gameObject, new Vector3(0f,0f,rotationDegree*right+Random.Range(-rotationOffset, rotationOffset)), rotateTimer).setEaseOutQuad().setOnComplete(()=>Turn(-right));
+        //LeanTween.rotateLocal(gameObject, new Vector3(0f,0f,rotationDegree*right+Random.Range(-rotationOffset, rotationOffset)), rotateTimer).setEaseOutQuad().setOnComplete(()=>Turn(-right));
+        LeanTween.rotateZ(gameObject, rotationDegree*right+Random.Range(-rotationOffset, rotationOffset), rotateTimer).setEaseOutQuad().setOnComplete(()=>Turn(-right));
     }
 
     public void Flip() {

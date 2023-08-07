@@ -130,6 +130,10 @@ public class NPC : MonoBehaviour
 
     void StartPanic()
     {
+        if (!Alive) {
+            Panic = true;
+            return;
+        }
         Panic = true;
         controller.moveAnim.rotateTimer += Random.Range(-0.1f, 0.1f);
         moveSpeed = 0;
