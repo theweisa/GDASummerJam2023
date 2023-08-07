@@ -1116,6 +1116,13 @@ MonoBehaviour:
       Data3: 943988386
       Data4: 1359840167
     Path: event:/Player_PunchHit
+  <Explosion>k__BackingField:
+    Guid:
+      Data1: 1297954649
+      Data2: 1165394784
+      Data3: -1158473848
+      Data4: 1851985414
+    Path: event:/Player_Explode
   <Ambience>k__BackingField:
     Guid:
       Data1: -910595068
@@ -1649,7 +1656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3802105263216819667, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 7428301297922447725, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
       propertyPath: m_Name
@@ -2148,37 +2155,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9132639970294816019, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 3693207527452824094, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 2846852969243032204, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 8376706093547471072, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 3848771058299635970, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 4951108305055339624, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 7515012203424003828, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 6856794994247895288, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 2546220874044629495, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 5661206932540593759, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

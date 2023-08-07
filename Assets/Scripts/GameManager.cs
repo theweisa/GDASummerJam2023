@@ -152,6 +152,7 @@ public class GameManager : UnitySingleton<GameManager>
         yield return QueueNumber.Instance.AnimateFadeOut();
         yield return new WaitForSeconds(2f);
         var explode = Instantiate(explosion, PlayerManager.Instance.transform.position, Quaternion.identity);
+        RuntimeManager.PlayOneShot(FMODEventReferences.instance.Explosion);
         CameraManager.Instance.StartShake(50f, 0.7f, 20f);
         PlayerManager.Instance.gameObject.SetActive(false);
         yield return new WaitForSeconds(0.8f);
