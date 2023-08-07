@@ -107,7 +107,7 @@ MonoBehaviour:
   textBoxObject: {fileID: 0}
   textBox: {fileID: 0}
   script: []
-  textSpeed: 0
+  textSpeed: 0.1
   rb: {fileID: 0}
   talkedTo: 0
   Alive: 0
@@ -127,6 +127,14 @@ PrefabInstance:
     - target: {fileID: 906299009278555892, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: m_Name
       value: Libertarian
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: rageValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: textSpeed
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: script.Array.size
@@ -215,8 +223,16 @@ PrefabInstance:
       value: The Count
       objectReference: {fileID: 0}
     - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: pitch
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: rageValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: textSpeed
-      value: 0.12
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: script.Array.size
@@ -299,6 +315,18 @@ PrefabInstance:
     - target: {fileID: 906299009278555892, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: m_Name
       value: Son
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: pitch
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: rageValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: textSpeed
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: script.Array.size
@@ -391,6 +419,14 @@ PrefabInstance:
       value: LazyWorker
       objectReference: {fileID: 0}
     - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: rageValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: textSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: script.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -408,11 +444,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4900881734889096757, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.608881
+      value: 26.1
       objectReference: {fileID: 0}
     - target: {fileID: 4900881734889096757, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.1514664
+      value: 8.4
       objectReference: {fileID: 0}
     - target: {fileID: 4900881734889096757, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -558,7 +594,7 @@ MonoBehaviour:
   Panic: 0
   moveSpeed: 0
   moveDirection: {x: 0, y: 0}
-  rageValue: 10
+  rageValue: 0
   pitch: 10
   initialScript:
   - Hello! Welcome to the DMC!
@@ -587,6 +623,18 @@ PrefabInstance:
     - target: {fileID: 906299009278555892, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: m_Name
       value: Gym Rat
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: rageValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: textSpeed
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: script.Array.size
@@ -679,6 +727,18 @@ PrefabInstance:
       value: Creeper
       objectReference: {fileID: 0}
     - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: pitch
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: rageValue
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: textSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: script.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -757,6 +817,14 @@ PrefabInstance:
       value: Happy
       objectReference: {fileID: 0}
     - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: rageValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: textSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: script.Array.data[0]
       value: I love this DMV so much! That's why I took TWO numbers!
       objectReference: {fileID: 0}
@@ -821,6 +889,14 @@ PrefabInstance:
     - target: {fileID: 906299009278555892, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: m_Name
       value: Stoner
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: pitch
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: rageValue
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: textSpeed
@@ -911,6 +987,18 @@ PrefabInstance:
     - target: {fileID: 906299009278555892, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: m_Name
       value: Mom
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: pitch
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: rageValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
+      propertyPath: textSpeed
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2775412118175924498, guid: ebf5d66184d32c641bcc973abb69c3a4, type: 3}
       propertyPath: script.Array.size
