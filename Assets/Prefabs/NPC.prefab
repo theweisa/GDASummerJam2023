@@ -147,8 +147,7 @@ MonoBehaviour:
   interactPrompt: {fileID: 3304079405475939072}
   controller: {fileID: 0}
   textBox: {fileID: 0}
-  script:
-  - 
+  script: []
   textSpeed: 0
   rb: {fileID: 0}
   talkedTo: 0

@@ -1471,7 +1471,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 401174273572209597, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
       propertyPath: m_fontSize
-      value: 19.7
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 401174273572209597, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
       propertyPath: m_fontAsset
@@ -1479,7 +1479,11 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: dd5dba9dae348a440bff4057b076f33b, type: 2}
     - target: {fileID: 401174273572209597, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
       propertyPath: m_fontSizeMax
-      value: 20
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 401174273572209597, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 401174273572209597, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
       propertyPath: m_sharedMaterial
@@ -1635,6 +1639,102 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3802105263216819667, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
       propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.size
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[0]
+      value: 'Now serving: F7148, at window number 2'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[1]
+      value: 'Now serving: F7149, at window number 3'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[2]
+      value: 'Now serving: F7150, at window number 1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[3]
+      value: 'Now serving: F7151, at window number 2'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[4]
+      value: Will the owner of the gas-powered Tesla please move it
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[5]
+      value: 'Now serving: F7152, at window number 3'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[6]
+      value: 'Now serving: John, at window number 2'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[7]
+      value: 'Now serving: F7153, at window number 4'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[8]
+      value: 'Now serving: F7154. at window number 1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[9]
+      value: 'Now serving: Z0001 at an undisclosed location'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[10]
+      value: 'Now serving: F7155 at window 3.14159265'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[11]
+      value: 'Now serving: -.. .---- ...-- .---- at window number ..---'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[12]
+      value: 'Now serving: F7156 at a window near you'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[13]
+      value: 'Now serving: Federer at court number 1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[14]
+      value: 'Now serving: Chicken wings for $4.99!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[15]
+      value: 'Now serving: F7157 at window number 2'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[16]
+      value: 'Now serving: Divorce papers to my lying ex'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[17]
+      value: Please have your ID ready when your number is called
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741270134716233847, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: numberQueue.Array.data[18]
+      value: 'Now serving: F7159 at window number 3'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928694111316266784, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 142.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928694111316266784, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 31.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928694111316266784, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928694111316266784, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7428301297922447725, guid: da2ffaf796d58e94ead66b84c4848e82, type: 3}
@@ -2053,9 +2153,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 577208596595583597, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021143275437781361, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050224392595419466, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: initialScript.Array.data[2]
+      value: Your number is...F7158!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939135518405007843, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2179393327302820504, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3169453652428920210, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: m_Name
       value: NPCs
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888265288020426364, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272366082800214927, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6134345811593565595, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080510169866709911, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7943643904511288809, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2097,6 +2233,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8781704875893323527, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2129,6 +2269,21 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 5661206932540593759, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5760599550882256089, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 694850273668349736, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4739191063637629591, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5970001480406659522, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8798140220001834679, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 212b8d9ed384dc949a96f2671efad7ad, type: 3}
