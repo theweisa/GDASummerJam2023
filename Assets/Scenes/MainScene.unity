@@ -527,6 +527,13 @@ MonoBehaviour:
       Data3: 467965324
       Data4: -739309585
     Path: event:/World_TensionRiser
+  <ChairHit>k__BackingField:
+    Guid:
+      Data1: -553583966
+      Data2: 1138206702
+      Data3: 430001551
+      Data4: 734912614
+    Path: event:/Chair_Hit
   <DialogueBlip>k__BackingField:
     Guid:
       Data1: 1753522702
