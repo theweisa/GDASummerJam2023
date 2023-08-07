@@ -513,6 +513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textBoxObject: {fileID: 7046161597819874741, guid: f6c4ddfab1e66064abbc51ba7c92ffa7, type: 3}
+  interactPrompt: {fileID: 0}
   controller: {fileID: 0}
   textBox: {fileID: 0}
   script:
