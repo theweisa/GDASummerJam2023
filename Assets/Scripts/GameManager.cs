@@ -24,8 +24,8 @@ public class GameManager : UnitySingleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(StartGame());
-        StartCoroutine(PostRage());
+        StartCoroutine(StartGame());
+        //StartCoroutine(PostRage());
         //PlayerManager.Instance.controller.StopPlayer();
         //StartCoroutine(FeelingRagePhase());
     }
