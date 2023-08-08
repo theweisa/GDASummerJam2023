@@ -22,7 +22,6 @@ public class FrontWallLogic : MonoBehaviour
     void OnTriggerExit2D(Collider2D coll) {
         //if (coll.GetComponent<Rigidbody2D>() == null) return;
         if (coll.gameObject.tag != "Player") return;
-        Debug.Log("trigger exit: " + coll);
         LeanTween.color(gameObject, ogColor, 0.2f);
     }
 }

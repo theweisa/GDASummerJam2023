@@ -23,12 +23,16 @@ public class CameraShake : MonoBehaviour
         if (duration > 0) {
             strength = Mathf.Max(str, strength);
             frequency = Mathf.Max(freq, frequency);
+            if (dur > duration) {
+                baseDuration = dur;
+                duration = dur;
+            }
         }
         else {
             strength = str;
+            baseDuration = dur;
+            duration = dur;
         }
-        baseDuration = dur;
-        duration = dur;
         permaShake = perma;
         if (permaShake) {
             baseDuration = 1f;

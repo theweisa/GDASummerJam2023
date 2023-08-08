@@ -6,10 +6,11 @@ using Cinemachine;
 public class CameraManager : UnitySingleton<CameraManager>
 {
     public CinemachineVirtualCamera playerCamera;
+    public float baseZoom;
     // Start is called before the first frame update
     void Start()
     {
-        
+        baseZoom = playerCamera.m_Lens.OrthographicSize;
     }
 
     // Update is called once per frame
@@ -42,7 +43,7 @@ public class CameraManager : UnitySingleton<CameraManager>
     public void Zoom(float newVal, float dur=1f, LeanTweenType ease=LeanTweenType.easeOutQuart) {
         LeanTween.value(gameObject, (float val) => {
             playerCamera.m_Lens.OrthographicSize = val;
-        }, playerCamera.m_Lens.OrthographicSize, newVal, dur).setEase(ease);
+        }, playerCamera.m_Lens.OrthographicSize, newVal, dur).setEase(ease).setIgnoreTimeScale(true);
     }
 
     public void SetEase(float x, float y) {

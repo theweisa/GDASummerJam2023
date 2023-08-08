@@ -23,17 +23,23 @@ public class NPC : MonoBehaviour
     [Header("try to set to value from 0-25; the higher the squeakier i think")]
     public int pitch = 10;
 
-    protected float hitstun = 0.7f;
+    protected float hitstun = 0f;
     protected float speakRange = 7f;
     Coroutine sporadicMove;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag != "Punch") return;
+        if (PlayerManager.Instance.controller.enemiesHit.Contains(gameObject)) return;
+        PlayerManager.Instance.controller.enemiesHit.Add(gameObject);
         if (!Panic){
             StartCoroutine(GameManager.Instance.StartPanic());
         }
         StartCoroutine(OnHit());
+        /*if (!Panic){
+            StartCoroutine(GameManager.Instance.StartPanic());
+        }
+        StartCoroutine(OnHit());*/
     }
 
     void FixedUpdate() {
@@ -55,36 +61,41 @@ public class NPC : MonoBehaviour
         rb.drag = 3;
         if (Alive){
             Alive = false;
-            CameraManager.Instance.StartShake(60f, 0.4f, 500f);
-            LeanTween.value(gameObject, (float val) => {
+            GameManager.Instance.npcsHit++;
+            CameraManager.Instance.StartShake(60f, 0.2f, 500f);
+            /*LeanTween.value(gameObject, (float val) => {
                 Time.timeScale = val;
-            }, 1f, 0f, hitstun/2f).setEaseOutExpo().setIgnoreTimeScale(true);
-            LeanTween.value(gameObject, (float val)=>{
+            }, 1f, 0f, hitstun/2f).setEaseOutExpo().setIgnoreTimeScale(true);*/
+            CameraManager.Instance.playerCamera.m_Lens.OrthographicSize = CameraManager.Instance.baseZoom*0.65f;
+            CameraManager.Instance.Zoom(CameraManager.Instance.baseZoom, 0.3f, LeanTweenType.linear);
+            /*LeanTween.value(gameObject, (float val)=>{
                 Time.timeScale = val;
-            }, 0f, 1f, hitstun/2f).setEaseInExpo().setIgnoreTimeScale(true);
-            //Time.timeScale = 0f;
-            yield return new WaitForSecondsRealtime(hitstun);
-            //Time.timeScale = 1f;
+            }, 0.2f, 1f, hitstun).setIgnoreTimeScale(true).setEaseInExpo();*/
+            if (hitstun > 0) {
+                Time.timeScale = 0f;
+                yield return new WaitForSecondsRealtime(hitstun);
+                Time.timeScale = 1f;
+            }
+            if (!CheckAlive() && GameManager.Instance.gameState != GameState.PostRage){
+                Debug.Log("Game Over");
+                StartCoroutine(GameManager.Instance.PostRage());
+            }
         }
         else {
-            CameraManager.Instance.StartShake(30f, 0.4f, 100f);
+            CameraManager.Instance.StartShake(30f, 0.15f, 100f);
         }
-        
-
-        if (!CheckAlive() && GameManager.Instance.gameState != GameState.PostRage){
-            Debug.Log("Game Over");
-            StartCoroutine(GameManager.Instance.PostRage());
-        }
+        yield return null;
     }
     public bool CheckAlive() {
-        GameObject[] gos;
+        return GameManager.Instance.npcsHit < GameManager.Instance.totalNpcs;
+        /*GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag("NPC");
         bool check=false;
         foreach(GameObject go in gos){
             check = check || Global.FindComponent<NPC>(go).Alive;
             print(Global.FindComponent<NPC>(go).Alive + " " + check);
         }
-        return check;
+        return check;*/
     }
     public virtual void Start()
     {
@@ -120,7 +131,7 @@ public class NPC : MonoBehaviour
     {
         if (GameManager.Instance.gameState != GameState.Wait) return;
         bool inDistance = Vector3.Distance(PlayerManager.Instance.transform.position, transform.position) <= speakRange;
-        if (interactPrompt != null && script.Count != 0 && inDistance) {
+        if (interactPrompt != null && script.Count != 0 && inDistance && PlayerManager.Instance.controller.canInteract) {
             interactPrompt.SetActive(true);
         }
         if (Input.GetMouseButtonDown(0) 

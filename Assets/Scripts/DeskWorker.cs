@@ -13,7 +13,8 @@ public class DeskWorker : NPC
     public override void Start()
     {
         base.Start();
-        hitstun = 1.5f;
+        //hitstun = 1f;
+        hitstun = 0.3f;
         speakRange = 6f;
         script = initialScript;
     }
@@ -31,7 +32,7 @@ public class DeskWorker : NPC
     {
         if (GameManager.Instance.gameState != GameState.Start && GameManager.Instance.gameState != GameState.FeelingRage && GameManager.Instance.gameState != GameState.Wait) return;
         bool inDistance = Vector3.Distance(PlayerManager.Instance.transform.position, transform.position) <= speakRange;
-        if (interactPrompt != null && script.Count != 0 && inDistance) {
+        if (interactPrompt != null && script.Count != 0 && inDistance && PlayerManager.Instance.controller.canInteract) {
             interactPrompt.SetActive(true);
         }
         if (Input.GetMouseButtonDown(0) 
@@ -51,7 +52,6 @@ public class DeskWorker : NPC
     public override void Update() {
         base.Update();
         if (GameManager.Instance.followDeskWorker) {
-            Debug.Log("?");
             PlayerManager.Instance.cameraPosition.position = transform.position;
         }
     }

@@ -14,12 +14,14 @@ public class EnemyScript : MonoBehaviour
     {
         if (!Panic){
             Debug.Log("Panic?" + Panic);
-            GameObject[] gos;
-            gos = GameObject.FindGameObjectsWithTag("NPC");
-
-            foreach(GameObject go in gos){
-                go.SendMessage("StartPanic");
+            //GameObject[] gos;
+            //gos = GameObject.FindGameObjectsWithTag("NPC");
+            foreach (Transform npc in GameManager.Instance.npcs) {
+                npc.SendMessage("StartPanic");
             }
+            /*foreach(GameObject go in gos){
+                go.SendMessage("StartPanic");
+            }*/
         }
         if (Alive){
             if (collision.gameObject.name == "Square"){

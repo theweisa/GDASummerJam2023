@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 2584651734008547786}
+  baseZoom: 0
 --- !u!1 &6187113262687364092
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +172,7 @@ GameObject:
   - component: {fileID: 4981857896442351290}
   - component: {fileID: 2584651734008547786}
   - component: {fileID: 6602729219714222646}
+  - component: {fileID: 7524259282606046233}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: Untagged
@@ -234,6 +236,24 @@ MonoBehaviour:
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1393563952893790129}
 --- !u!114 &6602729219714222646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6187113262687364092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded0c89ab241783409ae58cf964bff16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0
+  baseDuration: 1
+  strength: 1
+  permaShake: 0
+  shaking: 0
+  frequency: 1
+--- !u!114 &7524259282606046233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -395,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
+  m_IgnoreTimeScale: 1
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1

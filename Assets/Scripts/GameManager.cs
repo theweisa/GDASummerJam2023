@@ -21,11 +21,16 @@ public class GameManager : UnitySingleton<GameManager>
     public RectTransform gameOver;
     public TMP_Text ticketText;
     [HideInInspector] public bool followDeskWorker=false;
+    public Transform npcs;
+    public int totalNpcs;
+    public int npcsHit;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(StartGame());
+        totalNpcs = npcs.childCount;
+        npcsHit = 0;
         //StartCoroutine(PostRage());
         //PlayerManager.Instance.controller.StopPlayer();
         //StartCoroutine(FeelingRagePhase());
@@ -36,7 +41,11 @@ public class GameManager : UnitySingleton<GameManager>
     {
         if (RageLogic.Instance.rageMeter.value >= 100f && gameState == GameState.Wait && PlayerManager.Instance.controller.canInteract) {
             StartCoroutine(FeelingRagePhase());
-        } 
+        }
+        /*if (Input.GetKeyDown(KeyCode.Space)) {
+            PlayerManager.Instance.controller.canPunch = true;
+            PlayerManager.Instance.controller.canMove = true;
+        }*/
     }
 
     public IEnumerator StartGame() {
@@ -130,6 +139,7 @@ public class GameManager : UnitySingleton<GameManager>
         yield return new WaitForSeconds(3.5f);
         RuntimeManager.PlayOneShot(FMODEventReferences.instance.Panic);
         EnvironmentManager.Instance.UnFreezeAllObjects();
+        
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag("NPC");
         foreach(GameObject go in gos){

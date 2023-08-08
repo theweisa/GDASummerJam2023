@@ -18,6 +18,7 @@ public class PlayerController : BaseCharacterController
     [HideInInspector] public bool makeRed=true;
     private Color ogColor;
     public Animator fists;
+    public List<GameObject> enemiesHit = new List<GameObject>();
     //public Animator LFistAnim;
     //public Animator RFistAnim;
     protected override void Awake() {
@@ -97,6 +98,7 @@ public class PlayerController : BaseCharacterController
         Debug.Log("Punching");
         yield return new WaitForSeconds(0.1f);
         punchHitbox.enabled = false;
+        enemiesHit.Clear();
     }
 
     public void StopPlayer() {
