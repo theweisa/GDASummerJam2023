@@ -13,14 +13,15 @@ public class DeskWorker : NPC
     public override void Start()
     {
         base.Start();
-        hitstun = 0.8f;
+        hitstun = 1.5f;
+        speakRange = 6f;
         script = initialScript;
     }
 
     public override IEnumerator OnHit()
     {
         yield return base.OnHit();
-        hitstun = 0.1f;
+        //hitstun = 0.1f;
         GameManager.Instance.tutorialText.gameObject.SetActive(false);
         GetComponent<Collider2D>().isTrigger = false;
         PlayerManager.Instance.controller.punchForce = PlayerManager.Instance.controller.basePunchForce;
@@ -29,9 +30,14 @@ public class DeskWorker : NPC
     public override void OnMouseOver()
     {
         if (GameManager.Instance.gameState != GameState.Start && GameManager.Instance.gameState != GameState.FeelingRage && GameManager.Instance.gameState != GameState.Wait) return;
+        bool inDistance = Vector3.Distance(PlayerManager.Instance.transform.position, transform.position) <= speakRange;
+        if (interactPrompt != null && script.Count != 0 && inDistance) {
+            interactPrompt.SetActive(true);
+        }
         if (Input.GetMouseButtonDown(0) 
             && PlayerManager.Instance.controller.canInteract
-            && script.Count != 0)
+            && script.Count != 0
+            && inDistance)
         {
             if (textBox == null)
             {
@@ -42,7 +48,8 @@ public class DeskWorker : NPC
         }
     }
 
-    void Update() {
+    public override void Update() {
+        base.Update();
         if (GameManager.Instance.followDeskWorker) {
             Debug.Log("?");
             PlayerManager.Instance.cameraPosition.position = transform.position;

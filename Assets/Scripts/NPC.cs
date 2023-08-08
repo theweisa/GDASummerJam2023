@@ -23,7 +23,8 @@ public class NPC : MonoBehaviour
     [Header("try to set to value from 0-25; the higher the squeakier i think")]
     public int pitch = 10;
 
-    protected float hitstun = 0.21f;
+    protected float hitstun = 0.7f;
+    protected float speakRange = 7f;
     Coroutine sporadicMove;
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -53,18 +54,24 @@ public class NPC : MonoBehaviour
         rb.AddForce(dir * 40, ForceMode2D.Impulse);
         rb.drag = 3;
         if (Alive){
-            Alive = false;   
-            Time.timeScale = 0f;
-            yield return new WaitForSecondsRealtime(hitstun);
-            Time.timeScale = 1f;
+            Alive = false;
             CameraManager.Instance.StartShake(60f, 0.4f, 500f);
+            LeanTween.value(gameObject, (float val) => {
+                Time.timeScale = val;
+            }, 1f, 0f, hitstun/2f).setEaseOutExpo().setIgnoreTimeScale(true);
+            LeanTween.value(gameObject, (float val)=>{
+                Time.timeScale = val;
+            }, 0f, 1f, hitstun/2f).setEaseInExpo().setIgnoreTimeScale(true);
+            //Time.timeScale = 0f;
+            yield return new WaitForSecondsRealtime(hitstun);
+            //Time.timeScale = 1f;
         }
         else {
             CameraManager.Instance.StartShake(30f, 0.4f, 100f);
         }
         
 
-        if (!CheckAlive()){
+        if (!CheckAlive() && GameManager.Instance.gameState != GameState.PostRage){
             Debug.Log("Game Over");
             StartCoroutine(GameManager.Instance.PostRage());
         }
@@ -102,15 +109,24 @@ public class NPC : MonoBehaviour
         FacePlayer();
     }
 
+    public virtual void Update() {
+        bool inDistance = Vector3.Distance(PlayerManager.Instance.transform.position, transform.position) <= speakRange;
+        if (interactPrompt.activeSelf && !inDistance) {
+            interactPrompt.SetActive(false);
+        }
+    }
+
     public virtual void OnMouseOver()
     {
         if (GameManager.Instance.gameState != GameState.Wait) return;
-        if (interactPrompt != null && script.Count != 0) {
+        bool inDistance = Vector3.Distance(PlayerManager.Instance.transform.position, transform.position) <= speakRange;
+        if (interactPrompt != null && script.Count != 0 && inDistance) {
             interactPrompt.SetActive(true);
         }
         if (Input.GetMouseButtonDown(0) 
             && PlayerManager.Instance.controller.canInteract
-            && script.Count != 0)
+            && script.Count != 0
+            && inDistance)
         {
             if (textBox == null)
             {

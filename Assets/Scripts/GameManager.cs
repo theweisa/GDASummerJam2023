@@ -42,6 +42,7 @@ public class GameManager : UnitySingleton<GameManager>
     public IEnumerator StartGame() {
         PlayerManager.Instance.cameraPosition.transform.position = Vector3.zero;
         logo.gameObject.SetActive(true);
+        gameOver.gameObject.SetActive(false);
         RageLogic.Instance.gameObject.SetActive(false);
         PlayerManager.Instance.controller.StopPlayer();
         yield return new WaitUntil(()=>Input.GetMouseButtonDown(0));
@@ -96,8 +97,9 @@ public class GameManager : UnitySingleton<GameManager>
         gameState = GameState.Rage;
         yield return new WaitForSeconds(2f);
         RageLogic.Instance.rageMeter.value = 100f;
+        LeanTween.value(RageLogic.Instance.fill.gameObject, (float val)=>{RageLogic.Instance.rageMeter.value = val;}, 0, 100f, 0.2f);
         LeanTween.value(RageLogic.Instance.fill.gameObject, (float val)=>{RageLogic.Instance.fill.localScale = new Vector2(val,1);}, 0, 5, 1.5f);
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1.5f);
         RuntimeManager.StudioSystem.setParameterByName("RageEnd", 1);
         yield return new WaitForSeconds(2f);
         AudioManager.instance.CleanUp(true);

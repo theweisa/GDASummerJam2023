@@ -39,7 +39,7 @@ public class CameraShake : MonoBehaviour
     }
     public void Update() {
         if (duration > 0) {
-            duration = Mathf.Max(permaShake ? baseDuration : duration - Time.deltaTime, 0f);
+            duration = Mathf.Max(permaShake ? baseDuration : duration - Time.unscaledDeltaTime, 0f);
             //Debug.Log("duration: "+duration);
             //cameraShake.m_AmplitudeGain = Mathf.Lerp(strength, 0f, duration/baseDuration);
             cameraShake.m_AmplitudeGain = strength * duration/baseDuration;
